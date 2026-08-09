@@ -296,6 +296,8 @@
     .theme-paint-kids .v5e-schedule[data-theme="kids"] a.v5e-button {
       color: var(--red);
       background: transparent;
+      font-family: var(--title);
+      font-weight: 400;
     }
 
     .hero-art {
