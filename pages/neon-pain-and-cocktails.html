@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../assets/styles/main.css">
     <link rel="stylesheet" href="../assets/styles/elements/header.css">
     <link rel="stylesheet" href="../assets/styles/elements/footer.css">
+    <link rel="stylesheet" href="../assets/styles/elements/store.css">
     <link rel="stylesheet" href="../assets/styles/neon-pain-and-cocktails.css">
     <script src="../assets/scripts/elements.js" defer></script>
 </head>
@@ -82,43 +83,7 @@
             </div>
         </section>
 
-        <section class="npk-section" id="neon-booking">
-            <div class="npk-shell">
-                <div class="npk-panel npk-booking-wrap">
-                    <div class="npk-section-head">
-                        <span class="npk-pill">Rezerviši</span>
-                        <h2 class="npk-heading">Izaberi svoju <span class="pink script">neon</span> noć</h2>
-                        <p class="npk-text">Ne treba vam iskustvo. Odaberite termin, okupite ekipu i dođite spremni za boje, muziku i koktele.</p>
-                    </div>
-
-                    <div class="npk-booking-grid">
-                        <article class="npk-book-card">
-                            <div class="npk-book-image"><img src="../assets/images/neon-paint-and-cocktails/Picture2.webp" alt="Neon Cat radionica" loading="lazy"></div>
-                            <div class="npk-tags"><span class="npk-tag">14.08.</span><span class="npk-tag pink">20:00</span></div>
-                            <h3 class="npk-book-title">Neon Cat</h3>
-                            <p>Fluorescentna mačka, UV paleta i četiri koktela.</p>
-                            <div class="npk-book-footer"><strong>45 €</strong><a href="#" class="npk-book-link">Rezerviši</a></div>
-                        </article>
-
-                        <article class="npk-book-card">
-                            <div class="npk-book-image"><img src="../assets/images/neon-paint-and-cocktails/Picture5.webp" alt="Electric Opening radionica" loading="lazy"></div>
-                            <div class="npk-tags"><span class="npk-tag">21.08.</span><span class="npk-tag pink">20:30</span></div>
-                            <h3 class="npk-book-title">Electric Opening</h3>
-                            <p>Neonska linija, party atmosfera i večernji ritam.</p>
-                            <div class="npk-book-footer"><strong>45 €</strong><a href="#" class="npk-book-link">Rezerviši</a></div>
-                        </article>
-
-                        <article class="npk-book-card">
-                            <div class="npk-book-image"><img src="../assets/images/neon-paint-and-cocktails/Picture4.webp" alt="Glow Freestyle radionica" loading="lazy"></div>
-                            <div class="npk-tags"><span class="npk-tag">28.08.</span><span class="npk-tag pink">19:30</span></div>
-                            <h3 class="npk-book-title">Glow Freestyle</h3>
-                            <p>Veče slobodnih poteza, neon rekvizita i muzike.</p>
-                            <div class="npk-book-footer"><strong>45 €</strong><a href="#" class="npk-book-link">Rezerviši</a></div>
-                        </article>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <include-element id="neon-booking" src="store" data-store-layout="grid" data-event-type="neon" data-store-theme="neon" data-store-eyebrow="Rezerviši" data-store-title="Izaberi svoju neon noć" data-store-subtitle="Ne treba vam iskustvo. Odaberite termin, okupite ekipu i dođite spremni za boje, muziku i koktele."></include-element>
 
         <section class="npk-section" id="neon-guide">
             <div class="npk-shell">

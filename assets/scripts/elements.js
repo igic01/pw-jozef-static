@@ -94,18 +94,131 @@ function setupStore(scope) {
     if (!store || store.dataset.ready === "true") return;
     store.dataset.ready = "true";
 
-    store.addEventListener("click", (event) => {
-        const filter = event.target.closest("[data-filter]");
-        if (!filter) return;
-        const value = filter.dataset.filter;
+    const host = scope instanceof HTMLElement && scope.matches("include-element")
+        ? scope
+        : store.closest("include-element");
+    const config = host?.dataset || {};
+    const eventsSource = scope.querySelector("[data-store-events]");
+    const grid = store.querySelector("[data-store-grid]");
+    const viewport = store.querySelector("[data-store-viewport]");
+    const empty = store.querySelector("[data-store-empty]");
+    const title = store.querySelector("[data-store-title]");
+    const subtitle = store.querySelector("[data-store-subtitle]");
+    const eyebrow = store.querySelector("[data-store-eyebrow]");
+    const previous = store.querySelector('[data-store-direction="previous"]');
+    const next = store.querySelector('[data-store-direction="next"]');
+    const layout = config.storeLayout === "carousel" ? "carousel" : "grid";
+    const theme = config.storeTheme || "classic";
+    const requestedTypes = (config.eventType || "all").split(",").map((value) => value.trim()).filter(Boolean);
+    const hideDifficulty = config.hideDifficulty === "true";
+    const bookingLink = config.storeLink || "schedule.html";
+    const typeLabels = {
+        "paint-wine": "Paint & Wine",
+        neon: "Neon Paint & Cocktails",
+        kids: "Paint & Kids"
+    };
+    let events = [];
 
-        store.querySelectorAll("[data-filter]").forEach((button) => {
-            button.classList.toggle("is-active", button === filter);
-        });
-        store.querySelectorAll("[data-category]").forEach((card) => {
-            card.hidden = value !== "all" && card.dataset.category !== value;
+    try {
+        events = JSON.parse(eventsSource?.textContent || "[]");
+    } catch (error) {
+        console.error("Store events could not be parsed.", error);
+    }
+
+    if (!requestedTypes.includes("all")) {
+        events = events.filter((event) => requestedTypes.includes(event.type));
+    }
+
+    store.dataset.layout = layout;
+    store.dataset.theme = theme;
+    store.dataset.hideDifficulty = String(hideDifficulty);
+    if (config.storeTitle && title) title.textContent = config.storeTitle;
+    if (config.storeSubtitle && subtitle) subtitle.textContent = config.storeSubtitle;
+    if (config.storeEyebrow && eyebrow) eyebrow.textContent = config.storeEyebrow;
+    if (config.storeEyebrow === "" && eyebrow) eyebrow.hidden = true;
+
+    const createEventCard = (event) => {
+        const card = document.createElement("article");
+        card.className = `v5e-card v5e-card--${event.type}`;
+
+        const top = document.createElement("div");
+        top.className = "v5e-card-top";
+        const dateGroup = document.createElement("div");
+        const date = document.createElement("div");
+        date.className = "v5e-date";
+        date.textContent = event.date;
+        const day = document.createElement("div");
+        day.className = "v5e-day";
+        day.textContent = event.day;
+        const type = document.createElement("span");
+        type.className = "v5e-type";
+        type.textContent = typeLabels[event.type] || event.type;
+        dateGroup.append(date, day);
+        top.append(dateGroup, type);
+
+        const image = document.createElement("div");
+        image.className = "v5e-image";
+        const imageElement = document.createElement("img");
+        imageElement.src = event.img;
+        imageElement.alt = `${event.title} radionica`;
+        imageElement.loading = "lazy";
+        image.appendChild(imageElement);
+
+        const name = document.createElement("h3");
+        name.className = "v5e-name";
+        name.textContent = event.title;
+
+        const meta = document.createElement("div");
+        meta.className = "v5e-card-meta";
+        const time = document.createElement("span");
+        time.className = "v5e-time";
+        time.textContent = event.time;
+        const difficulty = document.createElement("span");
+        difficulty.className = "v5e-difficulty";
+        const difficultyValue = Math.min(5, Math.max(1, Number.parseInt(event.difficulty, 10) || 1));
+        difficulty.textContent = "/".repeat(difficultyValue);
+        difficulty.setAttribute("aria-label", `Težina ${difficultyValue} od 5`);
+        difficulty.title = `Težina ${difficultyValue} od 5`;
+        meta.append(time, difficulty);
+
+        const footer = document.createElement("div");
+        footer.className = "v5e-card-footer";
+        const price = document.createElement("span");
+        price.className = "v5e-price";
+        price.textContent = event.price;
+        const link = document.createElement("a");
+        link.className = "button v5e-button";
+        link.href = bookingLink;
+        link.textContent = "Rezerviši";
+        footer.append(price, link);
+
+        card.append(top, image, name, meta, footer);
+        return card;
+    };
+
+    grid?.replaceChildren(...events.map(createEventCard));
+    if (empty) empty.hidden = events.length > 0;
+
+    const updateArrows = () => {
+        if (!viewport || layout !== "carousel") return;
+        const maxScroll = viewport.scrollWidth - viewport.clientWidth;
+        if (previous) previous.disabled = viewport.scrollLeft <= 2;
+        if (next) next.disabled = viewport.scrollLeft >= maxScroll - 2;
+    };
+
+    store.addEventListener("click", (event) => {
+        const direction = event.target.closest("[data-store-direction]");
+        if (!direction || !viewport || layout !== "carousel") return;
+        const amount = viewport.clientWidth * 0.82 * (direction.dataset.storeDirection === "next" ? 1 : -1);
+        viewport.scrollBy({
+            left: amount,
+            behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"
         });
     });
+
+    viewport?.addEventListener("scroll", updateArrows, { passive: true });
+    window.addEventListener("resize", updateArrows);
+    requestAnimationFrame(updateArrows);
 }
 
 function setupVoucher(scope) {
