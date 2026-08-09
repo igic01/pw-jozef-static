@@ -365,13 +365,6 @@ body {
     }
 }
 
-@media (max-width: 420px) {
-    .v4e-navbar-actions {
-        grid-column: 1 / -1;
-        width: 100%;
-    }
-}
-
 /* Paint and Kids header theme */
 .theme-paint-kids .v4e-navbar {
     color: #241a18;
