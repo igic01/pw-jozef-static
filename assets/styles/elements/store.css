@@ -478,6 +478,7 @@
     .v5e-head-copy {
         width: 100%;
         min-width: 0;
+        text-align: center;
     }
 
     .v5e-title {
@@ -487,7 +488,7 @@
 
     .v5e-schedule[data-layout="carousel"] .v5e-arrows {
         width: 100%;
-        justify-content: flex-end;
+        justify-content: center;
     }
 
     .v5e-arrow {
