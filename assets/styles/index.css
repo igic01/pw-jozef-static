@@ -1,3 +1,79 @@
+.page-loading {
+    overflow: hidden;
+}
+
+.v4e-page-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 22px;
+    background: #ffffff;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.45s ease, visibility 0.45s ease;
+}
+
+.v4e-page-loader.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.v4e-page-loader img {
+    width: clamp(88px, 11vw, 138px);
+    height: auto;
+    transform-origin: center;
+    animation: v4e-loader-pulse 0.9s ease-in-out infinite alternate;
+}
+
+.v4e-page-loader span {
+    width: min(180px, 42vw);
+    height: 3px;
+    overflow: hidden;
+    background: rgba(191, 32, 32, 0.16);
+}
+
+.v4e-page-loader span::after {
+    content: "";
+    display: block;
+    width: 45%;
+    height: 100%;
+    background: var(--color-red);
+    animation: v4e-loader-line 1s ease-in-out infinite alternate;
+}
+
+@keyframes v4e-loader-pulse {
+    from {
+        opacity: 0.58;
+        scale: 0.88;
+    }
+
+    to {
+        opacity: 1;
+        scale: 1.04;
+    }
+}
+
+@keyframes v4e-loader-line {
+    from {
+        translate: 0 0;
+    }
+
+    to {
+        translate: 122% 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .v4e-page-loader img,
+    .v4e-page-loader span::after {
+        animation: none;
+    }
+}
+
 .v4e-info-grid {
     display: grid;
     grid-template-columns: minmax(280px, 0.95fr) minmax(320px, 1.15fr);

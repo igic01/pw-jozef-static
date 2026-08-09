@@ -15,7 +15,12 @@
     <script src="../assets/scripts/elements.js?v=20260810-hero-4s" defer></script>
 </head>
 
-<body>
+<body class="page-loading">
+    <div class="v4e-page-loader" data-page-loader role="status" aria-label="Učitavanje stranice">
+        <img src="../assets/images/logo.webp" alt="Paint and Wine">
+        <span aria-hidden="true"></span>
+    </div>
+
     <include-element src="header"></include-element>
 
     <main>
@@ -114,6 +119,17 @@
     </main>
 
     <include-element src="footer"></include-element>
+
+    <script>
+        window.addEventListener("load", () => {
+            const loader = document.querySelector("[data-page-loader]");
+            window.setTimeout(() => {
+                document.body.classList.remove("page-loading");
+                loader?.classList.add("is-hidden");
+                loader?.addEventListener("transitionend", () => loader.remove(), { once: true });
+            }, 500);
+        });
+    </script>
 </body>
 
 </html>
