@@ -153,12 +153,18 @@
 }
 
 .v5e-card-top,
-.v5e-card-meta,
 .v5e-card-footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
+}
+
+.v5e-date-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 5px;
 }
 
 .v5e-date {
@@ -180,7 +186,7 @@
 
 .v5e-type {
     color: var(--color-red);
-    text-align: right;
+    text-align: left;
 }
 
 .v5e-image {
@@ -207,15 +213,20 @@
 }
 
 .v5e-card-meta {
-    padding-top: 2px;
+    width: 100%;
+    padding: 10px 0;
     color: var(--color-soft-ink);
+    border-top: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
 }
 
 .v5e-difficulty {
+    display: block;
+    width: 100%;
     color: var(--color-red);
 }
 
-.v5e-schedule[data-hide-difficulty="true"] .v5e-difficulty {
+.v5e-schedule[data-hide-difficulty="true"] .v5e-card-meta {
     display: none;
 }
 
@@ -225,9 +236,11 @@
 }
 
 .v5e-price {
-    color: var(--color-ink);
-    font-size: 1.12rem;
+    color: var(--color-red);
+    font-family: var(--font-heading);
+    font-size: clamp(1.25rem, 1.8vw, 1.65rem);
     font-weight: 800;
+    line-height: 1;
     white-space: nowrap;
 }
 
@@ -282,8 +295,7 @@
 }
 
 .v5e-schedule[data-theme="neon"] .v5e-subtitle,
-.v5e-schedule[data-theme="neon"] .v5e-card-meta,
-.v5e-schedule[data-theme="neon"] .v5e-price {
+.v5e-schedule[data-theme="neon"] .v5e-card-meta {
     color: #dfeaff;
 }
 
@@ -309,6 +321,14 @@
 
 .v5e-schedule[data-theme="neon"] .v5e-name {
     color: #f4fbff;
+}
+
+.v5e-schedule[data-theme="neon"] .v5e-card-meta {
+    border-color: rgba(99, 244, 255, 0.18);
+}
+
+.v5e-schedule[data-theme="neon"] .v5e-price {
+    color: #b8ff4f;
 }
 
 .v5e-schedule[data-theme="neon"] .v5e-button {
@@ -354,8 +374,7 @@
 
 .v5e-schedule[data-theme="kids"] .v5e-eyebrow,
 .v5e-schedule[data-theme="kids"] .v5e-subtitle,
-.v5e-schedule[data-theme="kids"] .v5e-card-meta,
-.v5e-schedule[data-theme="kids"] .v5e-price {
+.v5e-schedule[data-theme="kids"] .v5e-card-meta {
     color: var(--ink, #241a18);
 }
 
@@ -394,6 +413,10 @@
 .v5e-schedule[data-theme="kids"] .v5e-name {
     color: var(--ink, #241a18);
     font-family: var(--title, var(--font-heading));
+}
+
+.v5e-schedule[data-theme="kids"] .v5e-price {
+    color: var(--red, #ef3936);
 }
 
 .v5e-schedule[data-theme="kids"] .v5e-button {

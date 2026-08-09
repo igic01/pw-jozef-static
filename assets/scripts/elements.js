@@ -147,14 +147,17 @@ function setupStore(scope) {
         const date = document.createElement("div");
         date.className = "v5e-date";
         date.textContent = event.date;
+        const dateMeta = document.createElement("div");
+        dateMeta.className = "v5e-date-meta";
         const day = document.createElement("div");
         day.className = "v5e-day";
         day.textContent = event.day;
-        const type = document.createElement("span");
-        type.className = "v5e-type";
-        type.textContent = typeLabels[event.type] || event.type;
-        dateGroup.append(date, day);
-        top.append(dateGroup, type);
+        const time = document.createElement("span");
+        time.className = "v5e-time";
+        time.textContent = event.time;
+        dateMeta.append(day, time);
+        dateGroup.append(date, dateMeta);
+        top.appendChild(dateGroup);
 
         const image = document.createElement("div");
         image.className = "v5e-image";
@@ -168,18 +171,19 @@ function setupStore(scope) {
         name.className = "v5e-name";
         name.textContent = event.title;
 
+        const type = document.createElement("div");
+        type.className = "v5e-type";
+        type.textContent = typeLabels[event.type] || event.type;
+
         const meta = document.createElement("div");
         meta.className = "v5e-card-meta";
-        const time = document.createElement("span");
-        time.className = "v5e-time";
-        time.textContent = event.time;
         const difficulty = document.createElement("span");
         difficulty.className = "v5e-difficulty";
         const difficultyValue = Math.min(5, Math.max(1, Number.parseInt(event.difficulty, 10) || 1));
-        difficulty.textContent = "/".repeat(difficultyValue);
+        difficulty.textContent = `Težina: ${"/".repeat(difficultyValue)}`;
         difficulty.setAttribute("aria-label", `Težina ${difficultyValue} od 5`);
         difficulty.title = `Težina ${difficultyValue} od 5`;
-        meta.append(time, difficulty);
+        meta.appendChild(difficulty);
 
         const footer = document.createElement("div");
         footer.className = "v5e-card-footer";
@@ -192,7 +196,7 @@ function setupStore(scope) {
         link.textContent = "Rezerviši";
         footer.append(price, link);
 
-        card.append(top, image, name, meta, footer);
+        card.append(top, image, name, type, meta, footer);
         return card;
     };
 
