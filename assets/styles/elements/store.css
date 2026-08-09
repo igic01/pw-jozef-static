@@ -469,11 +469,25 @@
     }
 
     .v5e-head {
-        align-items: center;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 20px;
+        margin-bottom: 24px;
+    }
+
+    .v5e-head-copy {
+        width: 100%;
+        min-width: 0;
     }
 
     .v5e-title {
-        font-size: clamp(2.15rem, 11vw, 3.25rem);
+        font-size: clamp(2rem, 11vw, 3rem);
+        overflow-wrap: anywhere;
+    }
+
+    .v5e-schedule[data-layout="carousel"] .v5e-arrows {
+        width: 100%;
+        justify-content: flex-end;
     }
 
     .v5e-arrow {
@@ -486,7 +500,25 @@
     }
 
     .v5e-schedule[data-layout="carousel"] .v5e-grid {
-        grid-auto-columns: 88%;
+        grid-auto-columns: 100%;
+    }
+
+    .v5e-card {
+        gap: 10px;
+        padding: 14px;
+        box-shadow: none;
+    }
+
+    .v5e-image {
+        aspect-ratio: 4 / 3;
+    }
+
+    .v5e-card-footer {
+        flex-wrap: wrap;
+    }
+
+    .v5e-button {
+        padding-inline: 14px;
     }
 
     .v5e-schedule[data-theme="kids"] .v5e-store-shell {
