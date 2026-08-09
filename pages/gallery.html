@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="sr-Latn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Galerija Paint and Wine Podgorica radionica, druženja i kreativnih iskustava.">
+    <title>Galerija | Paint &amp; Wine Podgorica</title>
+    <link rel="stylesheet" href="../assets/styles/main.css">
+    <link rel="stylesheet" href="../assets/styles/elements/header.css">
+    <link rel="stylesheet" href="../assets/styles/elements/footer.css">
+    <link rel="stylesheet" href="../assets/styles/gallery.css">
+    <script src="../assets/scripts/elements.js" defer></script>
+</head>
+
+<body>
+    <include-element src="header"></include-element>
+
+    <main class="v4g-page" data-gallery data-gallery-initial="12" data-gallery-batch="12">
+        <section class="v4g-gallery site-section" aria-labelledby="gallery-title">
+            <div class="container v4g-inner">
+                <header class="v4g-head">
+                    <h1 class="v4g-heading" id="gallery-title">Galerija</h1>
+                </header>
+
+                <div class="v4g-filters" aria-label="Filter galerije">
+                    <button class="v4g-filter is-active" type="button" data-gallery-filter="all">Sve</button>
+                    <button class="v4g-filter" type="button" data-gallery-filter="paint-wine">Paint &amp; Wine</button>
+                    <button class="v4g-filter" type="button" data-gallery-filter="portraits">Portreti</button>
+                    <button class="v4g-filter" type="button" data-gallery-filter="teamwork">Timski rad</button>
+                    <button class="v4g-filter" type="button" data-gallery-filter="kids">Paint &amp; Kids</button>
+                    <button class="v4g-filter" type="button" data-gallery-filter="neon">Neon Paint and Cocktails</button>
+                    <button class="v4g-filter" type="button" data-gallery-filter="outdoor">Radionice na otvorenom</button>
+                </div>
+
+                <div class="v4g-grid">
+                    <button class="v4g-item is-wide" type="button" data-gallery-categories="paint-wine" data-gallery-title="Kreativno veče" data-gallery-label="Paint &amp; Wine" data-gallery-full="../assets/images/placeholder.webp">
+                        <figure><img src="../assets/images/placeholder.webp" alt="Kreativno Paint and Wine veče" fetchpriority="high"><figcaption class="v4g-caption"><span>Paint &amp; Wine</span></figcaption></figure>
+                    </button>
+                    <button class="v4g-item" type="button" data-gallery-categories="portraits" data-gallery-title="Portret u nastajanju" data-gallery-label="Portreti" data-gallery-full="../assets/images/placeholder.webp">
+                        <figure><img src="../assets/images/placeholder.webp" alt="Slikanje portreta na radionici" loading="lazy"><figcaption class="v4g-caption"><span>Portreti</span></figcaption></figure>
+                    </button>
+                    <button class="v4g-item is-tall" type="button" data-gallery-categories="teamwork" data-gallery-title="Zajedničko platno" data-gallery-label="Timski rad" data-gallery-full="../assets/images/placeholder.webp">
+                        <figure><img src="../assets/images/placeholder.webp" alt="Tim slika zajedničko platno" loading="lazy"><figcaption class="v4g-caption"><span>Timski rad</span></figcaption></figure>
+                    </button>
+                    <button class="v4g-item" type="button" data-gallery-categories="kids" data-gallery-title="Mali umjetnici" data-gallery-label="Paint &amp; Kids" data-gallery-full="../assets/images/placeholder.webp">
+                        <figure><img src="../assets/images/placeholder.webp" alt="Paint and Kids kreativna radionica" loading="lazy"><figcaption class="v4g-caption"><span>Paint &amp; Kids</span></figcaption></figure>
+                    </button>
+                    <button class="v4g-item is-wide" type="button" data-gallery-categories="neon" data-gallery-title="Boje u mraku" data-gallery-label="Neon Paint and Cocktails" data-gallery-full="../assets/images/placeholder.webp">
+                        <figure><img src="../assets/images/placeholder.webp" alt="Neon slikanje u mraku" loading="lazy"><figcaption class="v4g-caption"><span>Neon Paint and Cocktails</span></figcaption></figure>
+                    </button>
+                    <button class="v4g-item" type="button" data-gallery-categories="outdoor" data-gallery-title="Slikanje pod otvorenim nebom" data-gallery-label="Radionice na otvorenom" data-gallery-full="../assets/images/placeholder.webp">
+                        <figure><img src="../assets/images/placeholder.webp" alt="Slikarska radionica na otvorenom" loading="lazy"><figcaption class="v4g-caption"><span>Radionice na otvorenom</span></figcaption></figure>
+                    </button>
+                    <button class="v4g-item is-wide" type="button" data-gallery-categories="paint-wine" data-gallery-title="Slika za uspomenu" data-gallery-label="Paint &amp; Wine" data-gallery-full="../assets/images/placeholder.webp">
+                        <figure><img src="../assets/images/placeholder.webp" alt="Završene slike sa Paint and Wine radionice" loading="lazy"><figcaption class="v4g-caption"><span>Paint &amp; Wine</span></figcaption></figure>
+                    </button>
+                    <button class="v4g-item" type="button" data-gallery-categories="portraits" data-gallery-title="Umjetnost portreta" data-gallery-label="Portreti" data-gallery-full="../assets/images/placeholder.webp">
+                        <figure><img src="../assets/images/placeholder.webp" alt="Umjetnost slikanja portreta" loading="lazy"><figcaption class="v4g-caption"><span>Portreti</span></figcaption></figure>
+                    </button>
+                    <button class="v4g-item" type="button" data-gallery-categories="teamwork" data-gallery-title="Timski potezi" data-gallery-label="Timski rad" data-gallery-full="../assets/images/placeholder.webp">
+                        <figure><img src="../assets/images/placeholder.webp" alt="Kreativni timski rad na radionici" loading="lazy"><figcaption class="v4g-caption"><span>Timski rad</span></figcaption></figure>
+                    </button>
+                    <button class="v4g-item" type="button" data-gallery-categories="kids" data-gallery-title="Porodična radionica" data-gallery-label="Paint &amp; Kids" data-gallery-full="../assets/images/placeholder.webp">
+                        <figure><img src="../assets/images/placeholder.webp" alt="Porodična Paint and Kids radionica" loading="lazy"><figcaption class="v4g-caption"><span>Paint &amp; Kids</span></figcaption></figure>
+                    </button>
+                    <button class="v4g-item is-tall" type="button" data-gallery-categories="neon" data-gallery-title="UV atmosfera" data-gallery-label="Neon Paint and Cocktails" data-gallery-full="../assets/images/placeholder.webp">
+                        <figure><img src="../assets/images/placeholder.webp" alt="Atmosfera pod UV svjetlom" loading="lazy"><figcaption class="v4g-caption"><span>Neon Paint and Cocktails</span></figcaption></figure>
+                    </button>
+                    <button class="v4g-item" type="button" data-gallery-categories="outdoor" data-gallery-title="Radionica u prirodi" data-gallery-label="Radionice na otvorenom" data-gallery-full="../assets/images/placeholder.webp">
+                        <figure><img src="../assets/images/placeholder.webp" alt="Kreativna radionica u prirodi" loading="lazy"><figcaption class="v4g-caption"><span>Radionice na otvorenom</span></figcaption></figure>
+                    </button>
+                    <button class="v4g-item is-wide" type="button" data-gallery-categories="paint-wine" data-gallery-title="Studio u bojama" data-gallery-label="Paint &amp; Wine" data-gallery-full="../assets/images/placeholder.webp">
+                        <figure><img src="../assets/images/placeholder.webp" alt="Paint and Wine studio u bojama" loading="lazy"><figcaption class="v4g-caption"><span>Paint &amp; Wine</span></figcaption></figure>
+                    </button>
+                    <button class="v4g-item" type="button" data-gallery-categories="portraits" data-gallery-title="Lice na platnu" data-gallery-label="Portreti" data-gallery-full="../assets/images/placeholder.webp">
+                        <figure><img src="../assets/images/placeholder.webp" alt="Naslikano lice na platnu" loading="lazy"><figcaption class="v4g-caption"><span>Portreti</span></figcaption></figure>
+                    </button>
+                    <button class="v4g-item" type="button" data-gallery-categories="teamwork" data-gallery-title="Kreativni tim" data-gallery-label="Timski rad" data-gallery-full="../assets/images/placeholder.webp">
+                        <figure><img src="../assets/images/placeholder.webp" alt="Tim tokom kreativne radionice" loading="lazy"><figcaption class="v4g-caption"><span>Timski rad</span></figcaption></figure>
+                    </button>
+                    <button class="v4g-item is-wide" type="button" data-gallery-categories="outdoor" data-gallery-title="Boje na otvorenom" data-gallery-label="Radionice na otvorenom" data-gallery-full="../assets/images/placeholder.webp">
+                        <figure><img src="../assets/images/placeholder.webp" alt="Slikanje bojama na otvorenom" loading="lazy"><figcaption class="v4g-caption"><span>Radionice na otvorenom</span></figcaption></figure>
+                    </button>
+                </div>
+
+                <p class="v4g-empty">Nema fotografija za odabranu kategoriju.</p>
+                <div class="v4g-more-wrap"><button class="v4g-load-more" type="button" data-gallery-load-more>Učitaj još</button></div>
+            </div>
+        </section>
+
+        <div class="v4g-lightbox" aria-hidden="true" data-gallery-lightbox>
+            <div class="v4g-lightbox-backdrop" data-gallery-lightbox-close></div>
+            <div class="v4g-lightbox-dialog" role="dialog" aria-modal="true" aria-labelledby="gallery-lightbox-title">
+                <button class="v4g-lightbox-nav" type="button" aria-label="Prethodna slika" data-gallery-lightbox-prev>&larr;</button>
+                <div class="v4g-lightbox-panel">
+                    <button class="v4g-lightbox-close" type="button" aria-label="Zatvori galeriju" data-gallery-lightbox-close>&times;</button>
+                    <div class="v4g-lightbox-media"><img src="" alt="" data-gallery-lightbox-image></div>
+                    <div class="v4g-lightbox-meta">
+                        <div><h2 class="v4g-lightbox-title" id="gallery-lightbox-title" data-gallery-lightbox-title></h2><p class="v4g-lightbox-category" data-gallery-lightbox-category></p></div>
+                        <div class="v4g-lightbox-count" data-gallery-lightbox-count></div>
+                    </div>
+                </div>
+                <button class="v4g-lightbox-nav" type="button" aria-label="Sljedeća slika" data-gallery-lightbox-next>&rarr;</button>
+            </div>
+        </div>
+    </main>
+
+    <include-element src="footer"></include-element>
+</body>
+
+</html>

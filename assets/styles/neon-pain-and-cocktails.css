@@ -1,0 +1,762 @@
+@font-face {
+    font-family: "Neon Glow";
+    src: url("../fonts/NEON%20GLOW.otf") format("opentype");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Moon Time";
+    src: url("../fonts/MoonTime-Regular.otf") format("opentype");
+    font-display: swap;
+}
+
+html {
+    scroll-behavior: auto !important;
+}
+
+body {
+    background: #020713;
+}
+
+.npk-page {
+    --npk-bg: #020713;
+    --npk-bg-soft: #06132d;
+    --npk-panel: rgba(4, 12, 32, 0.9);
+    --npk-panel-light: rgba(8, 24, 54, 0.82);
+    --npk-text: #eefaff;
+    --npk-muted: rgba(224, 241, 255, 0.76);
+    --npk-cyan: #63f4ff;
+    --npk-blue: #277dff;
+    --npk-pink: #ff4fd8;
+    --npk-violet: #9b55ff;
+    --npk-lime: #b9ff61;
+    --npk-line: rgba(99, 244, 255, 0.24);
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    color: var(--npk-text);
+    background:
+        linear-gradient(rgba(2, 7, 19, 0.78), rgba(2, 7, 19, 0.9)),
+        url("../images/neon-paint-and-cocktails/picture1.webp") center top / 380px auto repeat;
+    font-family: var(--font-body);
+}
+
+.npk-page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+        radial-gradient(circle at 12% 14%, rgba(39, 125, 255, 0.2), transparent 20%),
+        radial-gradient(circle at 88% 30%, rgba(255, 79, 216, 0.14), transparent 19%),
+        radial-gradient(circle at 50% 74%, rgba(99, 244, 255, 0.1), transparent 22%);
+    pointer-events: none;
+}
+
+.npk-section {
+    position: relative;
+    padding: clamp(34px, 4vw, 60px) var(--page-gutter);
+}
+
+.npk-shell {
+    width: min(1240px, 100%);
+    margin-inline: auto;
+}
+
+.npk-panel,
+.npk-hero-card,
+.npk-book-card,
+.npk-instruction {
+    position: relative;
+    border: 1px solid var(--npk-line);
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.012)),
+        var(--npk-panel);
+    box-shadow:
+        0 0 0 1px rgba(255, 79, 216, 0.06),
+        0 24px 70px rgba(0, 0, 0, 0.46),
+        inset 0 0 38px rgba(39, 125, 255, 0.05);
+}
+
+.npk-panel::before,
+.npk-hero-card::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 16px;
+    pointer-events: none;
+}
+
+.npk-title,
+.npk-heading,
+.npk-book-title,
+.npk-instruction h3 {
+    margin: 0;
+    font-family: "Neon Glow", var(--font-heading);
+    font-weight: 400;
+    letter-spacing: 0.055em;
+    line-height: 1.08;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.npk-title {
+    font-size: clamp(3.2rem, 7vw, 7rem);
+    text-shadow:
+        0 0 4px currentColor,
+        0 0 14px rgba(238, 250, 255, 0.46),
+        0 0 34px rgba(39, 125, 255, 0.35);
+}
+
+.npk-heading {
+    font-size: clamp(2.45rem, 5.2vw, 5.2rem);
+    text-shadow: 0 0 12px rgba(99, 244, 255, 0.24);
+}
+
+.npk-book-title {
+    font-size: clamp(1.4rem, 2.2vw, 2.1rem);
+    text-align: left;
+}
+
+.npk-title .cyan,
+.npk-heading .cyan {
+    color: var(--npk-cyan);
+    text-shadow: 0 0 5px var(--npk-cyan), 0 0 20px rgba(99, 244, 255, 0.64);
+}
+
+.npk-title .pink,
+.npk-heading .pink {
+    color: var(--npk-pink);
+    text-shadow: 0 0 5px var(--npk-pink), 0 0 22px rgba(255, 79, 216, 0.58);
+}
+
+.npk-title .script,
+.npk-heading .script {
+    display: inline-block;
+    font-family: "Moon Time", cursive;
+    font-size: 1.22em;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 0.7;
+    text-transform: none;
+}
+
+.npk-text,
+.npk-feature-list,
+.npk-book-card p,
+.npk-instruction p {
+    margin: 0;
+    color: var(--npk-muted);
+    font-size: clamp(0.98rem, 1.2vw, 1.08rem);
+    line-height: 1.72;
+}
+
+.npk-kicker,
+.npk-pill,
+.npk-tag {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    min-height: 38px;
+    padding: 0 15px;
+    color: var(--npk-cyan);
+    background: rgba(5, 14, 34, 0.88);
+    border: 1px solid rgba(99, 244, 255, 0.3);
+    border-radius: 999px;
+    box-shadow: inset 0 0 14px rgba(99, 244, 255, 0.06), 0 0 14px rgba(99, 244, 255, 0.08);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.npk-kicker::before,
+.npk-pill::before {
+    content: "";
+    width: 24px;
+    height: 4px;
+    margin-right: 10px;
+    background: linear-gradient(90deg, var(--npk-cyan), var(--npk-pink));
+    border-radius: 999px;
+    box-shadow: 0 0 10px var(--npk-cyan);
+}
+
+.npk-button,
+.npk-book-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    padding: 0 22px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.npk-button.primary {
+    color: #02101d;
+    background: linear-gradient(135deg, var(--npk-cyan), var(--npk-lime));
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 24px rgba(99, 244, 255, 0.34);
+}
+
+.npk-button.secondary,
+.npk-book-link {
+    color: var(--npk-text);
+    background: rgba(255, 79, 216, 0.12);
+    border: 1px solid rgba(255, 79, 216, 0.36);
+    box-shadow: 0 0 18px rgba(255, 79, 216, 0.12);
+}
+
+.npk-button:hover,
+.npk-button:focus-visible,
+.npk-book-link:hover,
+.npk-book-link:focus-visible {
+    outline: none;
+    transform: translateY(-2px);
+    box-shadow: 0 0 28px rgba(99, 244, 255, 0.32);
+}
+
+.npk-hero-section {
+    position: relative;
+}
+
+.npk-hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    width: 100%;
+    height: min(100vh, 940px);
+    min-height: 720px;
+    background: var(--npk-bg);
+}
+
+.npk-hero::before {
+    content: "";
+    position: absolute;
+    inset: 20px;
+    z-index: 5;
+    border: 1px solid rgba(99, 244, 255, 0.18);
+    box-shadow: inset 0 0 24px rgba(99, 244, 255, 0.04);
+    pointer-events: none;
+}
+
+.npk-hero::after {
+    display: none;
+}
+
+.npk-stage,
+.npk-slide,
+.npk-media {
+    position: absolute;
+    inset: 0;
+}
+
+.npk-slide {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0s linear 0.25s;
+}
+
+.npk-slide.is-active {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+}
+
+.npk-media {
+    overflow: hidden;
+    background: var(--npk-bg);
+}
+
+.npk-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.npk-slide--art .npk-media img,
+.npk-slide--event .npk-media img {
+    position: static;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 0;
+    box-shadow: none;
+    transform: none;
+    opacity: 1;
+}
+
+.npk-hero-content {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    place-items: center;
+    padding: clamp(32px, 6vw, 74px);
+    pointer-events: none;
+}
+
+.npk-hero-card {
+    width: min(940px, 100%);
+    max-width: 100%;
+    min-width: 0;
+    margin: auto;
+    padding: clamp(28px, 4.2vw, 54px);
+    background: rgba(3, 10, 28, 0.88);
+    border-radius: 26px;
+    text-align: center;
+    pointer-events: auto;
+}
+
+.npk-hero-copy {
+    display: grid;
+    justify-items: center;
+    gap: 18px;
+    min-width: 0;
+    width: 100%;
+}
+
+.npk-hero-copy .npk-text {
+    width: 100%;
+    max-width: 50ch;
+    overflow-wrap: anywhere;
+}
+
+.npk-actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    width: 100%;
+    margin-top: 4px;
+}
+
+.npk-hero-ui {
+    position: absolute;
+    right: 30px;
+    bottom: 28px;
+    z-index: 6;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 11px;
+    background: rgba(2, 9, 24, 0.88);
+    border: 1px solid rgba(99, 244, 255, 0.2);
+    border-radius: 999px;
+}
+
+.npk-nav,
+.npk-dot {
+    padding: 0;
+    color: var(--npk-text);
+    border: 0;
+    cursor: pointer;
+}
+
+.npk-nav {
+    width: 42px;
+    height: 42px;
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 50%;
+}
+
+.npk-nav:hover,
+.npk-nav:focus-visible {
+    background: rgba(255, 79, 216, 0.2);
+    outline: none;
+}
+
+.npk-dots {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.npk-dot {
+    width: 9px;
+    height: 9px;
+    background: rgba(255, 255, 255, 0.32);
+    border-radius: 999px;
+    transition: width 0.2s ease, background-color 0.2s ease;
+}
+
+.npk-dot.is-active {
+    width: 28px;
+    background: var(--npk-cyan);
+    box-shadow: 0 0 12px var(--npk-cyan);
+}
+
+.npk-split,
+.npk-voucher-layout {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.92fr) minmax(320px, 1.08fr);
+    align-items: center;
+    gap: clamp(22px, 4vw, 46px);
+}
+
+.npk-split {
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+    align-items: stretch;
+}
+
+.npk-copy-card,
+.npk-feature-art,
+.npk-booking-wrap,
+.npk-instructions-wrap,
+.npk-voucher-card {
+    padding: clamp(24px, 4vw, 44px);
+    border-radius: 28px;
+}
+
+.npk-copy-card,
+.npk-section-head,
+.npk-voucher-copy {
+    display: grid;
+    justify-items: center;
+    gap: 18px;
+    text-align: center;
+}
+
+.npk-feature-list {
+    display: grid;
+    gap: 12px;
+    padding-left: 22px;
+    text-align: left;
+}
+
+.npk-feature-list li::marker {
+    color: var(--npk-pink);
+}
+
+.npk-signature {
+    color: var(--npk-pink);
+    font-family: "Moon Time", cursive;
+    font-size: clamp(2.8rem, 5vw, 4.8rem);
+    line-height: 0.7;
+    text-shadow: 0 0 12px rgba(255, 79, 216, 0.6);
+}
+
+.npk-feature-art {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+.npk-image-frame,
+.npk-voucher-media {
+    overflow: hidden;
+    background:
+        linear-gradient(rgba(1, 7, 22, 0.2), rgba(1, 7, 22, 0.42)),
+        url("../images/neon-paint-and-cocktails/picture1.webp") center / cover;
+}
+
+.npk-image-frame {
+    flex: 1;
+    min-height: 0;
+    border: 1px solid rgba(99, 244, 255, 0.22);
+    border-radius: 20px;
+}
+
+.npk-image-frame img,
+.npk-voucher-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.npk-feature-art figcaption {
+    margin-top: 16px;
+    color: var(--npk-cyan);
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.npk-booking-wrap {
+    display: grid;
+    gap: 28px;
+}
+
+.npk-section-head .npk-text {
+    max-width: 62ch;
+}
+
+.npk-booking-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.npk-book-card {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 18px;
+    border-radius: 22px;
+}
+
+.npk-book-image {
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    background: var(--npk-bg-soft);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+}
+
+.npk-book-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.npk-book-card:hover .npk-book-image img {
+    transform: scale(1.03);
+}
+
+.npk-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.npk-tag {
+    min-height: 30px;
+    padding-inline: 11px;
+    font-size: 0.68rem;
+}
+
+.npk-tag.pink {
+    color: var(--npk-pink);
+    border-color: rgba(255, 79, 216, 0.3);
+}
+
+.npk-book-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: auto;
+}
+
+.npk-book-footer strong {
+    color: var(--npk-lime);
+    font-size: 1.1rem;
+}
+
+.npk-book-link {
+    min-height: 38px;
+    padding-inline: 14px;
+    font-size: 0.7rem;
+}
+
+.npk-instructions-wrap {
+    display: grid;
+    align-content: center;
+    gap: 26px;
+}
+
+.npk-instruction-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.npk-instruction {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 14px;
+    padding: 16px;
+    border-radius: 18px;
+}
+
+.npk-icon {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    background: linear-gradient(135deg, rgba(99, 244, 255, 0.15), rgba(255, 79, 216, 0.16));
+    border: 1px solid rgba(99, 244, 255, 0.2);
+    border-radius: 50%;
+    box-shadow: 0 0 16px rgba(99, 244, 255, 0.1);
+    font-size: 1.25rem;
+}
+
+.npk-instruction h3 {
+    margin-bottom: 5px;
+    font-size: 0.95rem;
+    text-align: left;
+}
+
+.npk-instruction p {
+    font-size: 0.86rem;
+    line-height: 1.5;
+}
+
+.npk-voucher-layout {
+    grid-template-columns: minmax(280px, 1fr) minmax(260px, 0.72fr);
+}
+
+.npk-voucher-copy .npk-text {
+    max-width: 55ch;
+}
+
+.npk-voucher-note {
+    color: var(--npk-cyan);
+    font-family: "Moon Time", cursive;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    line-height: 0.8;
+    text-shadow: 0 0 12px rgba(99, 244, 255, 0.56);
+}
+
+.npk-voucher-media {
+    min-height: 470px;
+    margin: 0;
+    padding: 18px;
+    border: 1px solid rgba(255, 79, 216, 0.22);
+    border-radius: 22px;
+}
+
+.npk-voucher-media img {
+    object-fit: cover;
+    border-radius: 14px;
+}
+
+@media (max-width: 980px) {
+    .npk-split,
+    .npk-voucher-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .npk-booking-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .npk-instruction-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .npk-voucher-media {
+        width: min(520px, 100%);
+        justify-self: center;
+    }
+}
+
+@media (max-width: 720px) {
+    .npk-section {
+        padding: 28px 14px;
+    }
+
+    .npk-hero {
+        height: calc(100svh - 72px);
+        min-height: 690px;
+    }
+
+    .npk-hero::before {
+        inset: 12px;
+    }
+
+    .npk-hero-content {
+        padding: 18px 16px 110px;
+    }
+
+    .npk-hero-card {
+        padding: 28px 18px;
+        border-radius: 20px;
+    }
+
+    .npk-title {
+        font-size: clamp(2.9rem, 15vw, 4.8rem);
+        width: 100%;
+        min-width: 0;
+    }
+
+    .npk-title .script {
+        display: block;
+        margin-top: 0.12em;
+        font-size: 0.94em;
+        line-height: 0.8;
+    }
+
+    .npk-heading {
+        font-size: clamp(2.25rem, 11vw, 3.8rem);
+    }
+
+    .npk-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .npk-button {
+        width: 100%;
+    }
+
+    .npk-hero-ui {
+        right: 18px;
+        bottom: 18px;
+        left: 18px;
+        justify-content: space-between;
+    }
+
+    .npk-copy-card,
+    .npk-feature-art,
+    .npk-booking-wrap,
+    .npk-instructions-wrap,
+    .npk-voucher-card {
+        padding: 22px 18px;
+        border-radius: 22px;
+    }
+
+    .npk-panel::before,
+    .npk-hero-card::before {
+        border-radius: 12px;
+    }
+
+    .npk-image-frame {
+        min-height: 460px;
+    }
+
+    .npk-booking-grid,
+    .npk-instruction-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .npk-voucher-media {
+        min-height: 420px;
+    }
+}
+
+@media (max-width: 420px) {
+    .npk-title {
+        font-size: clamp(2.45rem, 14vw, 3.6rem);
+    }
+
+    .npk-kicker,
+    .npk-pill {
+        font-size: 0.62rem;
+        letter-spacing: 0.12em;
+    }
+
+    .npk-book-footer {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .npk-book-link {
+        width: 100%;
+    }
+
+    .npk-voucher-media {
+        min-height: 360px;
+    }
+}

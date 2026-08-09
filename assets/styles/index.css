@@ -1,0 +1,395 @@
+.v4e-info-grid {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.95fr) minmax(320px, 1.15fr);
+    align-items: center;
+    gap: clamp(28px, 4vw, 54px);
+    min-height: 100vh;
+    padding: clamp(32px, 5vw, 64px);
+}
+
+.v4e-info-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.v4e-info-card {
+    position: relative;
+    overflow: hidden;
+    min-height: 180px;
+    aspect-ratio: 1 / 1;
+    margin: 0;
+    background: var(--color-image-placeholder);
+    border: 1px solid rgba(0, 0, 0, 0.22);
+}
+
+.v4e-info-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.95) contrast(1.02);
+}
+
+.v4e-info-copy {
+    max-width: 620px;
+}
+
+.v4e-info-copy h2,
+.v4e-info-copy h3,
+.v4e-voucher-title,
+.v4e-private-copy h2,
+.v4e-club-panel h2 {
+    margin: 0;
+    color: var(--color-red);
+    font-family: var(--font-heading);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 0.94;
+    text-transform: uppercase;
+    text-wrap: balance;
+}
+
+.v4e-info-copy h2,
+.v4e-voucher-title,
+.v4e-private-copy h2 {
+    font-size: var(--title-lg);
+}
+
+.v4e-info-copy h3 {
+    margin: 28px 0 12px;
+    font-size: var(--title-md);
+}
+
+.v4e-info-copy p {
+    max-width: 58ch;
+    margin: 0 0 16px;
+    color: var(--color-soft-ink);
+    font-size: var(--text-base);
+    line-height: var(--line-height-copy);
+}
+
+.v4e-voucher-inner {
+    display: grid;
+    justify-items: center;
+    gap: 28px;
+    padding: clamp(40px, 6vw, 72px) var(--page-gutter) clamp(52px, 7vw, 84px);
+    text-align: center;
+}
+
+.v4e-voucher-copy {
+    display: grid;
+    gap: 14px;
+    max-width: 980px;
+}
+
+.v4e-voucher-text,
+.v4e-private-copy p {
+    margin: 0;
+    color: var(--color-soft-ink);
+    font-size: clamp(1rem, 1.3vw, 1.08rem);
+    line-height: 1.7;
+}
+
+.v4e-voucher-stage {
+    display: grid;
+    justify-items: center;
+    gap: 18px;
+    width: min(980px, 100%);
+}
+
+.v4e-voucher-carousel {
+    width: 100%;
+    overflow: hidden;
+}
+
+.v4e-voucher-track {
+    display: flex;
+    transition: transform 0.65s ease;
+    will-change: transform;
+}
+
+.v4e-voucher-slide {
+    flex: 0 0 100%;
+    margin: 0;
+    padding: 0 clamp(6px, 1vw, 12px);
+}
+
+.v4e-voucher-frame {
+    padding: clamp(12px, 2vw, 16px);
+    background: var(--color-red);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    box-shadow: var(--shadow-soft);
+}
+
+.v4e-voucher-frame img {
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    object-fit: cover;
+    background: var(--color-white);
+}
+
+.v4e-voucher-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.v4e-voucher-dot {
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    background: rgba(191, 32, 32, 0.28);
+    border: 0;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: width 0.25s ease, background-color 0.25s ease;
+}
+
+.v4e-voucher-dot.is-active {
+    width: 34px;
+    background: var(--color-red);
+}
+
+.v4e-private-inner {
+    display: grid;
+    gap: 34px;
+    width: min(var(--container-wide), calc(100% - 40px));
+    margin: 0 auto;
+    padding: var(--section-y) var(--page-gutter) clamp(52px, 7vw, 88px);
+}
+
+.v4e-private-copy {
+    display: grid;
+    gap: 14px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.v4e-private-copy p {
+    max-width: 62ch;
+    margin-inline: auto;
+}
+
+.v4e-private-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 18px;
+}
+
+.v4e-private-card {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    min-height: 460px;
+    padding: 0 12px 18px;
+}
+
+.v4e-private-card figure {
+    overflow: hidden;
+    width: min(214px, 92%);
+    aspect-ratio: 1 / 1;
+    margin: 0 auto 14px;
+    background: var(--color-image-placeholder);
+    border-radius: 50%;
+}
+
+.v4e-private-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.45s ease;
+}
+
+.v4e-private-card:hover img {
+    transform: scale(1.04);
+}
+
+.v4e-private-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+}
+
+.v4e-private-card h3 {
+    margin: 0;
+    color: var(--color-red);
+    font-family: var(--font-heading);
+    font-size: var(--title-sm);
+    font-weight: 400;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.v4e-private-card p {
+    max-width: 22ch;
+    margin: 0 auto;
+    color: var(--color-soft-ink);
+    font-size: var(--text-small);
+    line-height: 1.55;
+}
+
+.v4e-private-card .button {
+    width: fit-content;
+    margin: auto auto 0;
+}
+
+.v4e-club {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    width: 100%;
+    background: var(--color-paper) url("../images/placeholder.webp") center / cover no-repeat;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.v4e-club::before {
+    content: "";
+    position: absolute;
+    inset: 20px;
+    z-index: -1;
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    pointer-events: none;
+}
+
+.v4e-club-inner {
+    display: grid;
+    justify-items: center;
+    gap: clamp(22px, 4vw, 36px);
+    width: min(1080px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: clamp(42px, 7vw, 86px) var(--page-gutter);
+}
+
+.v4e-club-panel {
+    display: grid;
+    gap: 18px;
+    width: 100%;
+    text-align: center;
+}
+
+.v4e-club-panel h2 {
+    color: var(--color-ink);
+    font-size: clamp(3rem, 6.8vw, 6.2rem);
+}
+
+.v4e-club-panel p {
+    max-width: 52ch;
+    margin: 0 auto;
+    font-size: clamp(0.95rem, 1.15vw, 1.04rem);
+    line-height: 1.6;
+}
+
+.v4e-club-form {
+    display: grid;
+    gap: 14px;
+    width: min(860px, 100%);
+    margin: 4px auto 0;
+}
+
+.v4e-club-form textarea {
+    width: 100%;
+    min-height: 210px;
+    padding: 16px 18px;
+    color: var(--color-ink);
+    background: rgba(247, 243, 236, 0.82);
+    border: 1px solid rgba(0, 0, 0, 0.32);
+    border-radius: 0;
+    line-height: 1.6;
+    outline: none;
+    resize: vertical;
+}
+
+.v4e-club-form textarea:focus {
+    background: var(--color-white);
+    border-color: var(--color-red);
+}
+
+.v4e-club-form button {
+    justify-self: center;
+    min-height: 52px;
+}
+
+.v4e-club-copy {
+    width: min(860px, 100%);
+    padding: 18px;
+    background: rgba(247, 243, 236, 0.88);
+    border: 1px solid rgba(0, 0, 0, 0.14);
+}
+
+.v4e-club-copy p {
+    margin: 0;
+    color: var(--color-soft-ink);
+    font-size: var(--text-lg);
+    line-height: var(--line-height-copy);
+}
+
+@media (max-width: 920px) {
+    .v4e-info-grid {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+
+    .v4e-private-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .v4e-private-card {
+        min-height: 430px;
+    }
+}
+
+@media (max-width: 640px) {
+    .v4e-info-grid {
+        gap: 24px;
+        padding: 28px 18px 36px;
+    }
+
+    .v4e-info-gallery {
+        gap: 12px;
+    }
+
+    .v4e-voucher-inner {
+        gap: 22px;
+        padding: 32px 18px 38px;
+    }
+
+    .v4e-voucher-title {
+        font-size: clamp(2rem, 9vw, 3rem);
+    }
+
+    .v4e-private-inner {
+        width: 100%;
+        gap: 24px;
+        padding: 32px 18px 38px;
+    }
+
+    .v4e-private-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .v4e-private-card {
+        min-height: auto;
+        padding: 0 18px 22px;
+    }
+
+    .v4e-club::before {
+        inset: 12px;
+    }
+
+    .v4e-club-inner {
+        width: 100%;
+        padding: 32px 18px 38px;
+    }
+
+    .v4e-club-panel {
+        padding: 24px 18px;
+    }
+
+    .v4e-club-form button {
+        justify-self: stretch;
+        width: 100%;
+    }
+}
