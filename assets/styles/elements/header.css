@@ -319,15 +319,23 @@ body {
 
 @media (max-width: 1180px) {
     .v4e-navbar-inner {
-        grid-template-columns: auto auto 1fr;
+        grid-template-columns: 1fr auto auto;
     }
 
     .v4e-navbar-toggle {
         display: inline-flex;
+        grid-column: 3;
+        grid-row: 1;
+    }
+
+    .v4e-navbar-actions {
+        grid-column: 2;
+        grid-row: 1;
     }
 
     .v4e-navbar-menu {
         grid-column: 1 / -1;
+        grid-row: 2;
         display: none;
         grid-template-columns: repeat(2, minmax(0, 1fr));
         padding: 14px 0 4px;
