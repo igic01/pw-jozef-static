@@ -58,10 +58,21 @@
 }
 
 .v5i-image {
+    display: block;
     overflow: hidden;
     aspect-ratio: 1 / 1;
     background: var(--color-image-placeholder);
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.v5i-name a {
+    text-decoration: none;
+}
+
+.v5i-name a:hover,
+.v5i-name a:focus-visible {
+    color: var(--color-red);
+    outline: none;
 }
 
 .v5i-image img {
@@ -112,6 +123,7 @@
 .v5i-button {
     width: 100%;
     cursor: pointer;
+    text-decoration: none;
 }
 
 @media (max-width: 1100px) {

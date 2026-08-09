@@ -1,3 +1,95 @@
+let googleTranslateLoader;
+const elementsScriptUrl = document.currentScript?.src || new URL("../assets/scripts/elements.js", window.location.href).href;
+const flagsBaseUrl = new URL("../images/flags/", elementsScriptUrl);
+const languageFlags = {
+    mne: "mne.webp",
+    en: "eng.webp",
+    sq: "alb.webp",
+    ru: "rus.webp"
+};
+
+function loadGoogleTranslate() {
+    const existingSelect = document.querySelector("#google_translate_element .goog-te-combo");
+    if (existingSelect) return Promise.resolve(existingSelect);
+    if (googleTranslateLoader) return googleTranslateLoader;
+
+    googleTranslateLoader = new Promise((resolve, reject) => {
+        let mount = document.querySelector("#google_translate_element");
+        if (!mount) {
+            mount = document.createElement("div");
+            mount.id = "google_translate_element";
+            mount.className = "v4e-google-translate";
+            mount.setAttribute("aria-hidden", "true");
+            document.body.appendChild(mount);
+        }
+
+        let attempts = 0;
+        const findSelect = () => {
+            const select = mount.querySelector(".goog-te-combo");
+            if (select) {
+                resolve(select);
+                return;
+            }
+            attempts += 1;
+            if (attempts >= 100) {
+                reject(new Error("Google Translate did not initialize."));
+                return;
+            }
+            window.setTimeout(findSelect, 100);
+        };
+
+        window.googleTranslateElementInit = () => {
+            try {
+                if (!mount.dataset.initialized) {
+                    new window.google.translate.TranslateElement({
+                        pageLanguage: "sr",
+                        includedLanguages: "en,sq,ru",
+                        autoDisplay: false
+                    }, "google_translate_element");
+                    mount.dataset.initialized = "true";
+                }
+                findSelect();
+            } catch (error) {
+                reject(error);
+            }
+        };
+
+        if (window.google?.translate?.TranslateElement) {
+            window.googleTranslateElementInit();
+            return;
+        }
+
+        const script = document.createElement("script");
+        script.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+        script.async = true;
+        script.dataset.googleTranslate = "true";
+        script.onerror = () => reject(new Error("Google Translate could not be loaded."));
+        document.head.appendChild(script);
+    });
+
+    return googleTranslateLoader;
+}
+
+function clearGoogleTranslateState() {
+    const expired = "expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+    document.cookie = `googtrans=;${expired}`;
+    if (window.location.hostname && window.location.hostname !== "localhost") {
+        document.cookie = `googtrans=;${expired};domain=${window.location.hostname}`;
+        document.cookie = `googtrans=;${expired};domain=.${window.location.hostname}`;
+    }
+}
+
+function getGoogleTranslateState() {
+    const cookie = document.cookie
+        .split("; ")
+        .find((entry) => entry.startsWith("googtrans="));
+    return cookie ? cookie.slice("googtrans=".length) : "";
+}
+
+function setGoogleTranslateState(language) {
+    document.cookie = `googtrans=/sr/${language};path=/;SameSite=Lax`;
+}
+
 function setupHeader(scope) {
     const header = scope.querySelector("[data-header]");
     if (!header || header.dataset.ready === "true") return;
@@ -29,6 +121,114 @@ function setupHeader(scope) {
     if (!languageDropdown) return;
     const languageToggle = languageDropdown.querySelector(".v4e-language-toggle");
     const currentLanguage = languageDropdown.querySelector(".v4e-language-current");
+    const languageOptionsRoot = languageDropdown.querySelector(".v4e-language-options");
+    const languageNames = {
+        mne: "Crnogorski",
+        en: "English",
+        sq: "Shqip",
+        ru: "Русский"
+    };
+
+    if (languageOptionsRoot) {
+        languageOptionsRoot.replaceChildren();
+
+        Object.entries(languageNames).forEach(([language, label]) => {
+            const option = document.createElement("button");
+            const flag = document.createElement("img");
+            option.type = "button";
+            option.dataset.language = language;
+            option.setAttribute("aria-label", label);
+            option.title = label;
+            flag.src = new URL(languageFlags[language], flagsBaseUrl).href;
+            flag.alt = "";
+            option.appendChild(flag);
+            languageOptionsRoot.appendChild(option);
+        });
+
+        const credit = document.createElement("p");
+        credit.className = "v4e-translate-credit";
+        credit.textContent = "Powered by Google Translate";
+        languageOptionsRoot.appendChild(credit);
+    }
+
+    const languageOptions = [...languageDropdown.querySelectorAll("[data-language]")];
+    const supportedLanguages = ["mne", "en", "sq", "ru"];
+    let storedLanguage = "mne";
+
+    languageOptions.forEach((option) => {
+        const flag = option.querySelector("img");
+        const flagFile = languageFlags[option.dataset.language];
+        if (flag && flagFile) flag.src = new URL(flagFile, flagsBaseUrl).href;
+    });
+
+    try {
+        const savedLanguage = window.localStorage.getItem("v4e-language");
+        if (supportedLanguages.includes(savedLanguage)) storedLanguage = savedLanguage;
+    } catch (error) {
+        console.warn("Language preference could not be read.", error);
+    }
+
+    const updateLanguageControl = (language) => {
+        const option = languageOptions.find((button) => button.dataset.language === language) || languageOptions[0];
+        const flag = option?.querySelector("img");
+        if (currentLanguage && flag) {
+            currentLanguage.src = flag.src;
+            currentLanguage.alt = option.getAttribute("aria-label") || "Izabrani jezik";
+        }
+        languageOptions.forEach((button) => {
+            const isActive = button === option;
+            button.classList.toggle("is-active", isActive);
+            button.setAttribute("aria-pressed", String(isActive));
+        });
+        document.documentElement.lang = language === "mne" ? "sr-Latn" : language;
+    };
+
+    const saveLanguage = (language) => {
+        try {
+            window.localStorage.setItem("v4e-language", language);
+        } catch (error) {
+            console.warn("Language preference could not be saved.", error);
+        }
+    };
+
+    const translatePage = async (language) => {
+        const previousLanguage = storedLanguage;
+        storedLanguage = language;
+        updateLanguageControl(language);
+        saveLanguage(language);
+
+        if (language === "mne") {
+            const shouldReload = previousLanguage !== "mne" || Boolean(getGoogleTranslateState());
+            clearGoogleTranslateState();
+            if (shouldReload) window.location.reload();
+            return;
+        }
+
+        const desiredTranslateState = `/sr/${language}`;
+        if (getGoogleTranslateState() !== desiredTranslateState) {
+            setGoogleTranslateState(language);
+            window.location.reload();
+            return;
+        }
+
+        try {
+            const select = await loadGoogleTranslate();
+            select.value = language;
+            select.dispatchEvent(new Event("change", { bubbles: true }));
+        } catch (error) {
+            console.warn(error.message);
+            const isPublicPage = /^https?:$/.test(window.location.protocol) && !["localhost", "127.0.0.1"].includes(window.location.hostname);
+            if (isPublicPage) {
+                const translateUrl = new URL("https://translate.google.com/translate");
+                translateUrl.searchParams.set("sl", "sr");
+                translateUrl.searchParams.set("tl", language);
+                translateUrl.searchParams.set("u", window.location.href);
+                window.location.assign(translateUrl.toString());
+            }
+        }
+    };
+
+    updateLanguageControl(storedLanguage);
 
     languageToggle?.addEventListener("click", (event) => {
         event.stopPropagation();
@@ -39,15 +239,47 @@ function setupHeader(scope) {
     languageDropdown.querySelector(".v4e-language-options")?.addEventListener("click", (event) => {
         const option = event.target.closest("[data-language]");
         if (!option) return;
-        currentLanguage.textContent = option.dataset.language;
         languageDropdown.classList.remove("is-open");
         languageToggle?.setAttribute("aria-expanded", "false");
+        translatePage(option.dataset.language);
     });
 
     document.addEventListener("click", (event) => {
         if (languageDropdown.contains(event.target)) return;
         languageDropdown.classList.remove("is-open");
         languageToggle?.setAttribute("aria-expanded", "false");
+    });
+
+    if (storedLanguage !== "mne") {
+        window.setTimeout(() => translatePage(storedLanguage), 250);
+    }
+}
+
+function setupCartBadge(scope) {
+    const cartLink = scope.querySelector("[data-cart-link]");
+    const countBadge = cartLink?.querySelector("[data-cart-count]");
+    if (!cartLink || !countBadge || cartLink.dataset.cartReady === "true") return;
+    cartLink.dataset.cartReady = "true";
+
+    const updateCount = () => {
+        let cart = [];
+        try {
+            const savedCart = JSON.parse(window.localStorage.getItem("v4e-cart") || "[]");
+            if (Array.isArray(savedCart)) cart = savedCart;
+        } catch (error) {
+            console.warn("Korpa nije mogla biti učitana.", error);
+        }
+
+        const count = cart.reduce((total, item) => total + Math.max(0, Number(item.quantity) || 0), 0);
+        countBadge.textContent = count > 99 ? "99+" : String(count);
+        countBadge.hidden = count === 0;
+        cartLink.setAttribute("aria-label", count === 0 ? "Korpa, prazna" : `Korpa, ${count} proizvoda`);
+    };
+
+    updateCount();
+    window.addEventListener("v4e:cart-updated", updateCount);
+    window.addEventListener("storage", (event) => {
+        if (event.key === "v4e-cart") updateCount();
     });
 }
 
@@ -111,7 +343,7 @@ function setupStore(scope) {
     const theme = config.storeTheme || "classic";
     const requestedTypes = (config.eventType || "all").split(",").map((value) => value.trim()).filter(Boolean);
     const hideDifficulty = config.hideDifficulty === "true";
-    const bookingLink = config.storeLink || "schedule.html";
+    const bookingLink = config.storeLink || "product.html";
     const typeLabels = {
         "paint-wine": "Paint & Wine",
         neon: "Neon Paint & Cocktails",
@@ -192,7 +424,12 @@ function setupStore(scope) {
         price.textContent = event.price;
         const link = document.createElement("a");
         link.className = "button v5e-button";
-        link.href = bookingLink;
+        const productUrl = new URL(bookingLink, window.location.href);
+        productUrl.searchParams.set("kind", "event");
+        ["type", "title", "date", "day", "time", "price", "difficulty", "img"].forEach((field) => {
+            if (event[field] !== undefined) productUrl.searchParams.set(field, event[field]);
+        });
+        link.href = productUrl.href;
         link.textContent = "Rezerviši";
         footer.append(price, link);
 
@@ -503,6 +740,7 @@ function setupGallery(scope) {
 
 function initializeComponents(scope = document) {
     setupHeader(scope);
+    setupCartBadge(scope);
     setupHero(scope);
     setupStore(scope);
     setupVoucher(scope);
@@ -520,9 +758,14 @@ class IncludeElement extends HTMLElement {
         const path = new URL(`./elements/${name}.html`, window.location.href);
 
         try {
-            const response = await fetch(path);
+            const response = await fetch(path, { cache: "no-cache" });
             if (!response.ok) throw new Error(`Failed to load ${path.pathname}: ${response.status}`);
-            this.innerHTML = await response.text();
+            const markup = await response.text();
+            const cleanMarkup = markup.replace(
+                /<!-- Code injected by live-server -->\s*<script>[\s\S]*?<\/script>/gi,
+                ""
+            );
+            this.innerHTML = cleanMarkup;
             initializeComponents(this);
         } catch (error) {
             console.error(error);

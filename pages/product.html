@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="sr-Latn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Paint and Wine proizvod iz naše kreativne kolekcije.">
+    <title>Proizvod | Paint &amp; Wine Podgorica</title>
+    <link rel="stylesheet" href="../assets/styles/main.css">
+    <link rel="stylesheet" href="../assets/styles/elements/header.css">
+    <link rel="stylesheet" href="../assets/styles/product.css">
+    <link rel="stylesheet" href="../assets/styles/elements/footer.css">
+    <script src="../assets/scripts/elements.js?v=20260810-cart-2" defer></script>
+    <script src="../assets/scripts/product.js?v=20260810-cart-2" defer></script>
+</head>
+
+<body>
+    <include-element src="header"></include-element>
+
+    <main class="v5p-page" data-product-page>
+        <section class="v5p-product site-section" aria-labelledby="product-title">
+            <div class="container v5p-shell">
+                <div class="v5p-layout">
+                    <div class="v5p-gallery">
+                        <div class="v5p-main-image">
+                            <img src="../assets/images/placeholder.webp" alt="Paint and Wine majica"
+                                data-product-image>
+                        </div>
+                        <div class="v5p-thumbnails" aria-label="Galerija proizvoda">
+                            <button class="v5p-thumbnail is-active" type="button" aria-label="Prikaži prvu fotografiju">
+                                <img src="../assets/images/placeholder.webp" alt="" loading="lazy">
+                            </button>
+                            <button class="v5p-thumbnail" type="button" aria-label="Prikaži drugu fotografiju">
+                                <img src="../assets/images/placeholder.webp" alt="" loading="lazy">
+                            </button>
+                            <button class="v5p-thumbnail" type="button" aria-label="Prikaži treću fotografiju">
+                                <img src="../assets/images/placeholder.webp" alt="" loading="lazy">
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="v5p-summary">
+                        <p class="v5p-eyebrow" data-product-field="eyebrow">Paint &amp; Wine kolekcija</p>
+                        <h1 class="v5p-title" id="product-title" data-product-field="name">Paint &amp; Wine majica</h1>
+                        <p class="v5p-price" data-product-field="price">25 €</p>
+                        <p class="v5p-short-description" data-product-field="shortDescription">
+                            Kratak opis proizvoda biće dodat naknadno. Ovo je privremeni tekst koji predstavlja osnovne
+                            informacije o proizvodu, materijalu i načinu korišćenja.
+                        </p>
+
+                        <dl class="v5p-facts" data-product-facts hidden></dl>
+
+                        <div class="v5p-order">
+                            <label class="v5p-quantity">
+                                <span>Količina</span>
+                                <input type="number" value="1" min="1" max="20" inputmode="numeric">
+                            </label>
+                            <button class="button v5p-cart-button" type="button" data-product-field="actionLabel">Dodaj u korpu</button>
+                        </div>
+
+                        <ul class="v5p-benefits" aria-label="Dodatne informacije" data-product-benefits>
+                            <li>Preuzimanje u Paint &amp; Wine studiju</li>
+                            <li>Pažljivo pripremljeno pakovanje</li>
+                            <li>Za dodatne informacije kontaktirajte nas</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="v5p-description site-section" aria-labelledby="long-description-title">
+            <div class="container v5p-description-shell">
+                <p class="v5p-eyebrow">Detalji proizvoda</p>
+                <h2 class="section-title" id="long-description-title" data-product-field="descriptionTitle">Opis proizvoda</h2>
+                <div class="v5p-long-description" data-product-long-description>
+                    <p>
+                        Ovo je privremeni duži opis proizvoda. Na ovom mjestu biće predstavljene detaljnije informacije
+                        o materijalima, dimenzijama, načinu izrade i karakteristikama proizvoda. Tekst će biti zamijenjen
+                        finalnim sadržajem kada informacije budu spremne.
+                    </p>
+                    <p>
+                        Proizvod je dio Paint &amp; Wine kolekcije inspirisane kreativnim druženjima, bojama i atmosferom
+                        studija. Ovdje se može dodati priča o proizvodu, preporuka za korišćenje i sve druge informacije
+                        koje kupcu mogu pomoći pri odabiru.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <include-element src="footer"></include-element>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="sr-Latn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pregled proizvoda i rezervacija u korpi.">
+    <title>Korpa | Paint &amp; Wine Podgorica</title>
+    <link rel="stylesheet" href="../assets/styles/main.css">
+    <link rel="stylesheet" href="../assets/styles/elements/header.css">
+    <link rel="stylesheet" href="../assets/styles/cart.css">
+    <link rel="stylesheet" href="../assets/styles/elements/footer.css">
+    <script src="../assets/scripts/elements.js?v=20260810-cart-2" defer></script>
+    <script src="../assets/scripts/cart.js?v=20260810-cart-2" defer></script>
+</head>
+
+<body>
+    <include-element src="header"></include-element>
+
+    <main>
+        <section class="v5c-cart site-section" aria-labelledby="cart-title">
+            <div class="container v5c-shell">
+                <header class="v5c-head">
+                    <p class="v5c-eyebrow">Pregled narudžbe</p>
+                    <h1 class="v5c-title" id="cart-title">Vaša korpa</h1>
+                    <p class="v5c-subtitle">Provjerite proizvode i rezervacije prije nastavka na plaćanje.</p>
+                </header>
+
+                <div class="v5c-empty" data-cart-empty hidden>
+                    <h2>Korpa je prazna</h2>
+                    <p>Dodajte proizvod ili izaberite termin radionice.</p>
+                    <a class="button" href="pw-shop.html">Pogledaj proizvode</a>
+                </div>
+
+                <div class="v5c-layout" data-cart-layout>
+                    <div class="v5c-products">
+                        <div class="v5c-products-head" aria-hidden="true">
+                            <span>Proizvod</span>
+                            <span>Ukupno</span>
+                        </div>
+                        <div class="v5c-items" data-cart-items aria-live="polite"></div>
+                    </div>
+
+                    <aside class="v5c-summary" aria-labelledby="cart-summary-title">
+                        <h2 id="cart-summary-title">Ukupno u korpi</h2>
+                        <details class="v5c-coupon">
+                            <summary>Dodaj kupon</summary>
+                            <form data-coupon-form>
+                                <label class="sr-only" for="coupon-code">Kod kupona</label>
+                                <input id="coupon-code" type="text" placeholder="Kod kupona">
+                                <button type="submit">Primijeni</button>
+                            </form>
+                        </details>
+                        <div class="v5c-summary-row v5c-summary-total">
+                            <span>Procijenjeno ukupno</span>
+                            <strong data-cart-total-price>0 €</strong>
+                        </div>
+                        <button class="button v5c-checkout" type="button" data-cart-checkout>Nastavi na plaćanje</button>
+                        <a class="v5c-continue" href="pw-shop.html">Nastavi kupovinu</a>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <include-element src="footer"></include-element>
+</body>
+
+</html>

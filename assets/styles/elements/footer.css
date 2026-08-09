@@ -133,24 +133,11 @@
     box-shadow: 0 20px 52px rgba(0, 0, 0, 0.46);
 }
 
-.v4e-footer-map img {
+.v4e-footer-map iframe {
+    display: block;
     width: 100%;
     height: 190px;
-    object-fit: cover;
-    filter: grayscale(0.7) brightness(0.55);
-}
-
-.v4e-footer-map span {
-    position: absolute;
-    right: 14px;
-    bottom: 14px;
-    padding: 9px 12px;
-    color: var(--color-white);
-    background: var(--color-red);
-    font-size: 0.72rem;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    border: 0;
 }
 
 .v4e-footer-bottom {
@@ -209,4 +196,119 @@
         flex-direction: column;
         align-items: flex-start;
     }
+}
+
+/* Paint and Kids footer theme */
+.theme-paint-kids .v4e-footer {
+    color: #ffffff;
+    background:
+        radial-gradient(circle at 8% 24%, rgba(253, 190, 79, 0.22), transparent 21%),
+        radial-gradient(circle at 88% 74%, rgba(104, 131, 253, 0.2), transparent 24%),
+        #241a18;
+    border: 3px solid #241a18;
+    box-shadow: 0 -10px 0 #fdbe4f;
+}
+
+.theme-paint-kids .v4e-footer::before {
+    border: 2px solid rgba(255, 255, 255, 0.18);
+    border-radius: 12px;
+}
+
+.theme-paint-kids .v4e-footer::after {
+    background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px) 0 0 / 96px 96px,
+        linear-gradient(135deg, rgba(221, 32, 27, 0.1), transparent 42%);
+}
+
+.theme-paint-kids .v4e-footer-title {
+    color: #fdbe4f;
+    text-shadow: 4px 4px 0 #dd201b;
+}
+
+.theme-paint-kids .v4e-footer-heading {
+    color: #ffffff;
+}
+
+.theme-paint-kids .v4e-footer-text,
+.theme-paint-kids .v4e-footer-links a,
+.theme-paint-kids .v4e-footer-contact,
+.theme-paint-kids .v4e-footer-contact a {
+    color: rgba(255, 255, 255, 0.82);
+}
+
+.theme-paint-kids .v4e-footer-links a:hover,
+.theme-paint-kids .v4e-footer-links a:focus-visible,
+.theme-paint-kids .v4e-footer-contact a:hover,
+.theme-paint-kids .v4e-footer-contact a:focus-visible {
+    color: #fdbe4f;
+}
+
+.theme-paint-kids .v4e-footer-map {
+    border: 3px solid #ffffff;
+    border-radius: 12px;
+    box-shadow: 8px 8px 0 #6883fd;
+}
+
+.theme-paint-kids .v4e-footer-bottom {
+    color: rgba(255, 255, 255, 0.68);
+    border-top: 2px solid rgba(253, 190, 79, 0.5);
+}
+
+/* Neon Paint and Cocktails footer theme */
+.theme-neon .v4e-footer {
+    color: #eefaff;
+    background:
+        linear-gradient(rgba(2, 7, 19, 0.9), rgba(2, 7, 19, 0.96)),
+        url("../../images/neon-paint-and-cocktails/picture1.webp") center / 380px auto repeat;
+    border-color: rgba(99, 244, 255, 0.24);
+    box-shadow: 0 -20px 64px rgba(0, 0, 0, 0.52), 0 -2px 22px rgba(39, 125, 255, 0.12);
+}
+
+.theme-neon .v4e-footer::before {
+    border-color: rgba(99, 244, 255, 0.2);
+    border-radius: 18px;
+}
+
+.theme-neon .v4e-footer::after {
+    background:
+        radial-gradient(circle at 10% 24%, rgba(39, 125, 255, 0.2), transparent 22%),
+        radial-gradient(circle at 88% 68%, rgba(255, 79, 216, 0.15), transparent 22%);
+}
+
+.theme-neon .v4e-footer-title,
+.theme-neon .v4e-footer-heading {
+    color: #eefaff;
+    font-family: "Neon Glow", var(--font-heading);
+    letter-spacing: 0.05em;
+    text-shadow: 0 0 12px rgba(99, 244, 255, 0.42);
+}
+
+.theme-neon .v4e-footer-heading {
+    color: #63f4ff;
+}
+
+.theme-neon .v4e-footer-text,
+.theme-neon .v4e-footer-links a,
+.theme-neon .v4e-footer-contact,
+.theme-neon .v4e-footer-contact a {
+    color: rgba(224, 241, 255, 0.78);
+}
+
+.theme-neon .v4e-footer-links a:hover,
+.theme-neon .v4e-footer-links a:focus-visible,
+.theme-neon .v4e-footer-contact a:hover,
+.theme-neon .v4e-footer-contact a:focus-visible {
+    color: #ff4fd8;
+    text-shadow: 0 0 9px rgba(255, 79, 216, 0.5);
+}
+
+.theme-neon .v4e-footer-map {
+    border-color: rgba(99, 244, 255, 0.46);
+    border-radius: 18px;
+    box-shadow: 0 0 0 1px rgba(255, 79, 216, 0.12), 0 20px 52px rgba(0, 0, 0, 0.5), 0 0 18px rgba(39, 125, 255, 0.15);
+}
+
+.theme-neon .v4e-footer-bottom {
+    color: rgba(224, 241, 255, 0.58);
+    border-top-color: rgba(99, 244, 255, 0.2);
 }
