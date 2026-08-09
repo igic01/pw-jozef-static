@@ -374,21 +374,81 @@
         display: none;
     }
 
+    .v5c-items {
+        gap: 14px;
+    }
+
     .v5c-item {
         grid-template-columns: 1fr;
-        padding-inline: 0;
+        gap: 16px;
+        padding: 16px;
+        background: var(--color-white);
+        border: 1px solid var(--color-line);
+        border-radius: 10px;
     }
 
     .v5c-product {
-        grid-template-columns: 78px minmax(0, 1fr);
+        grid-template-columns: 82px minmax(0, 1fr);
+        gap: 14px;
     }
 
     .v5c-item-image {
-        width: 78px;
+        width: 82px;
+        border-radius: 6px;
+    }
+
+    .v5c-item-content {
+        min-width: 0;
+    }
+
+    .v5c-item-name {
+        font-size: 1rem;
+        font-weight: 700;
+    }
+
+    .v5c-item-description {
+        font-size: 0.8rem;
+    }
+
+    .v5c-item-details {
+        gap: 6px;
+        margin-top: 10px;
+    }
+
+    .v5c-item-details li {
+        padding: 4px 7px;
+        background: var(--color-paper-warm);
+        border-radius: 4px;
+    }
+
+    .v5c-item-actions {
+        justify-content: space-between;
+        margin-top: 12px;
+    }
+
+    .v5c-remove {
+        border: 1px solid var(--color-line);
+        border-radius: 4px;
     }
 
     .v5c-line-total {
-        padding-left: 94px;
-        text-align: left;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 0 0;
+        color: var(--color-red);
+        border-top: 1px solid var(--color-line);
+        font-size: 1rem;
+        font-weight: 700;
+        text-align: right;
+    }
+
+    .v5c-line-total::before {
+        content: "Ukupno";
+        color: var(--color-soft-ink);
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
     }
 }

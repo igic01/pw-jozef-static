@@ -41,6 +41,7 @@ function createCartItem(item) {
     imageFrame.appendChild(image);
 
     const content = document.createElement("div");
+    content.className = "v5c-item-content";
     const name = document.createElement("h2");
     name.className = "v5c-item-name";
     const nameLink = document.createElement("a");
