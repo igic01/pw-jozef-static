@@ -131,11 +131,6 @@
     margin-inline: auto;
 }
 
-.v4e-about-founder-section .v4e-about-avatar {
-    border-color: var(--color-red);
-    box-shadow: 12px 14px 0 rgba(0, 0, 0, 0.84);
-}
-
 .v4e-about-avatar,
 .v4e-about-card,
 .v4e-about-wide,
