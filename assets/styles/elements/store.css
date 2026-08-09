@@ -368,7 +368,7 @@
 .v5e-schedule[data-theme="kids"] .v5e-head {
     margin: 0;
     padding: clamp(26px, 4vw, 42px);
-    background: var(--white, #fff);
+    background: #e7edff;
     border-bottom: 3px solid var(--ink, #241a18);
 }
 
@@ -397,6 +397,18 @@
     border-right: 3px solid var(--ink, #241a18);
     border-bottom: 0;
     box-shadow: none;
+}
+
+.v5e-schedule[data-theme="kids"] .v5e-card:nth-child(3n + 1) {
+    background: #fff4d4;
+}
+
+.v5e-schedule[data-theme="kids"] .v5e-card:nth-child(3n + 2) {
+    background: #eef1ff;
+}
+
+.v5e-schedule[data-theme="kids"] .v5e-card:nth-child(3n) {
+    background: #edffe5;
 }
 
 .v5e-schedule[data-theme="kids"] .v5e-card:last-child {

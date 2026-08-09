@@ -290,7 +290,9 @@ function setupHero(scope) {
 
     const slides = [...hero.querySelectorAll(".v4e-slide")];
     const dotsRoot = hero.querySelector(".v4e-dots");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let activeIndex = 0;
+    let autoplayId;
 
     const showSlide = (index) => {
         activeIndex = (index + slides.length) % slides.length;
@@ -301,6 +303,12 @@ function setupHero(scope) {
         });
     };
 
+    const restartAutoplay = () => {
+        window.clearInterval(autoplayId);
+        if (reduceMotion || document.hidden || slides.length < 2) return;
+        autoplayId = window.setInterval(() => showSlide(activeIndex + 1), 4000);
+    };
+
     slides.forEach((_, index) => {
         const dot = document.createElement("button");
         dot.type = "button";
@@ -308,6 +316,7 @@ function setupHero(scope) {
         dot.setAttribute("aria-label", `Prikaži slajd ${index + 1}`);
         dot.addEventListener("click", () => {
             showSlide(index);
+            restartAutoplay();
         });
         dotsRoot?.appendChild(dot);
     });
@@ -316,9 +325,12 @@ function setupHero(scope) {
         const button = event.target.closest("[data-direction]");
         if (!button) return;
         showSlide(activeIndex + (button.dataset.direction === "next" ? 1 : -1));
+        restartAutoplay();
     });
 
+    document.addEventListener("visibilitychange", restartAutoplay);
     showSlide(0);
+    restartAutoplay();
 }
 
 function setupStore(scope) {
@@ -341,7 +353,22 @@ function setupStore(scope) {
     const next = store.querySelector('[data-store-direction="next"]');
     const layout = config.storeLayout === "carousel" ? "carousel" : "grid";
     const theme = config.storeTheme || "classic";
-    const requestedTypes = (config.eventType || "all").split(",").map((value) => value.trim()).filter(Boolean);
+    const eventTypeKeys = {
+        "paint and wine": "paint-wine",
+        "paint-wine": "paint-wine",
+        "paint and kids": "kids",
+        kids: "kids",
+        "neon paint and cocktails": "neon",
+        neon: "neon"
+    };
+    const normalizeEventType = (value) => {
+        const normalized = String(value || "").trim().toLowerCase();
+        return eventTypeKeys[normalized] || normalized;
+    };
+    const requestedTypes = (config.eventType || "all")
+        .split(",")
+        .map(normalizeEventType)
+        .filter(Boolean);
     const hideDifficulty = config.hideDifficulty === "true";
     const bookingLink = config.storeLink || "product.html";
     const typeLabels = {
@@ -353,12 +380,13 @@ function setupStore(scope) {
 
     try {
         events = JSON.parse(eventsSource?.textContent || "[]");
+        events = events.map((event) => ({ ...event, typeKey: normalizeEventType(event.type) }));
     } catch (error) {
         console.error("Store events could not be parsed.", error);
     }
 
     if (!requestedTypes.includes("all")) {
-        events = events.filter((event) => requestedTypes.includes(event.type));
+        events = events.filter((event) => requestedTypes.includes(event.typeKey));
     }
 
     store.dataset.layout = layout;
@@ -371,7 +399,7 @@ function setupStore(scope) {
 
     const createEventCard = (event) => {
         const card = document.createElement("article");
-        card.className = `v5e-card v5e-card--${event.type}`;
+        card.className = `v5e-card v5e-card--${event.typeKey}`;
 
         const top = document.createElement("div");
         top.className = "v5e-card-top";
@@ -405,7 +433,7 @@ function setupStore(scope) {
 
         const type = document.createElement("div");
         type.className = "v5e-type";
-        type.textContent = typeLabels[event.type] || event.type;
+        type.textContent = typeLabels[event.typeKey] || event.type;
 
         const meta = document.createElement("div");
         meta.className = "v5e-card-meta";
@@ -485,7 +513,7 @@ function setupVoucher(scope) {
     const restartAutoplay = () => {
         window.clearInterval(autoplayId);
         if (reduceMotion || document.hidden || slides.length < 2) return;
-        autoplayId = window.setInterval(() => showSlide(activeIndex + 1), 3200);
+        autoplayId = window.setInterval(() => showSlide(activeIndex + 1), 4000);
     };
 
     slides.forEach((_, index) => {
@@ -563,19 +591,42 @@ function setupPaintKids(scope) {
 
     page.querySelectorAll("[data-carousel]").forEach((carouselRoot) => {
         const scroller = carouselRoot.querySelector(".hero-carousel");
+        const slides = [...carouselRoot.querySelectorAll(".hero-slide")];
         const previous = carouselRoot.querySelector("[data-carousel-prev]");
         const next = carouselRoot.querySelector("[data-carousel-next]");
         if (!scroller || !previous || !next) return;
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        let activeIndex = 0;
+        let autoplayId;
 
-        const scrollBySlide = (direction) => {
-            scroller.scrollBy({
-                left: direction * scroller.clientWidth,
-                behavior: "smooth"
+        const showSlide = (index) => {
+            if (!slides.length) return;
+            activeIndex = (index + slides.length) % slides.length;
+            scroller.scrollTo({
+                left: activeIndex * scroller.clientWidth,
+                behavior: reduceMotion ? "auto" : "smooth"
             });
         };
 
-        previous.addEventListener("click", () => scrollBySlide(-1));
-        next.addEventListener("click", () => scrollBySlide(1));
+        const restartAutoplay = () => {
+            window.clearInterval(autoplayId);
+            if (reduceMotion || document.hidden || slides.length < 2) return;
+            autoplayId = window.setInterval(() => showSlide(activeIndex + 1), 4000);
+        };
+
+        previous.addEventListener("click", () => {
+            showSlide(activeIndex - 1);
+            restartAutoplay();
+        });
+        next.addEventListener("click", () => {
+            showSlide(activeIndex + 1);
+            restartAutoplay();
+        });
+        scroller.addEventListener("scrollend", () => {
+            activeIndex = Math.round(scroller.scrollLeft / Math.max(1, scroller.clientWidth));
+        });
+        document.addEventListener("visibilitychange", restartAutoplay);
+        restartAutoplay();
     });
 }
 
@@ -587,7 +638,9 @@ function setupNeonPage(scope) {
     const hero = page.querySelector("[data-neon-hero]");
     const slides = hero ? [...hero.querySelectorAll(".npk-slide")] : [];
     const dotsRoot = hero?.querySelector(".npk-dots");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let activeIndex = 0;
+    let autoplayId;
 
     const showSlide = (index) => {
         if (!slides.length) return;
@@ -599,6 +652,12 @@ function setupNeonPage(scope) {
         });
     };
 
+    const restartAutoplay = () => {
+        window.clearInterval(autoplayId);
+        if (reduceMotion || document.hidden || slides.length < 2) return;
+        autoplayId = window.setInterval(() => showSlide(activeIndex + 1), 4000);
+    };
+
     slides.forEach((_, index) => {
         const dot = document.createElement("button");
         dot.type = "button";
@@ -606,6 +665,7 @@ function setupNeonPage(scope) {
         dot.setAttribute("aria-label", `Prikaži sliku ${index + 1}`);
         dot.addEventListener("click", () => {
             showSlide(index);
+            restartAutoplay();
         });
         dotsRoot?.appendChild(dot);
     });
@@ -614,14 +674,47 @@ function setupNeonPage(scope) {
         const control = event.target.closest("[data-neon-direction]");
         if (!control) return;
         showSlide(activeIndex + (control.dataset.neonDirection === "next" ? 1 : -1));
+        restartAutoplay();
     });
 
     hero?.addEventListener("keydown", (event) => {
         if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
         showSlide(activeIndex + (event.key === "ArrowRight" ? 1 : -1));
+        restartAutoplay();
     });
 
+    document.addEventListener("visibilitychange", restartAutoplay);
     showSlide(0);
+    restartAutoplay();
+}
+
+function setupAboutPage(scope) {
+    const page = scope.querySelector("[data-about-page]");
+    if (!page || page.dataset.carouselReady === "true") return;
+    page.dataset.carouselReady = "true";
+
+    const slides = [...page.querySelectorAll(".v4e-about-slide")];
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let activeIndex = 0;
+    let autoplayId;
+
+    const showSlide = (index) => {
+        if (!slides.length) return;
+        activeIndex = (index + slides.length) % slides.length;
+        slides.forEach((slide, slideIndex) => {
+            slide.classList.toggle("is-active", slideIndex === activeIndex);
+        });
+    };
+
+    const restartAutoplay = () => {
+        window.clearInterval(autoplayId);
+        if (reduceMotion || document.hidden || slides.length < 2) return;
+        autoplayId = window.setInterval(() => showSlide(activeIndex + 1), 4000);
+    };
+
+    document.addEventListener("visibilitychange", restartAutoplay);
+    showSlide(0);
+    restartAutoplay();
 }
 
 function setupGallery(scope) {
@@ -747,6 +840,7 @@ function initializeComponents(scope = document) {
     setupPrivateWorkshops(scope);
     setupPaintKids(scope);
     setupNeonPage(scope);
+    setupAboutPage(scope);
     setupGallery(scope);
 }
 

@@ -28,8 +28,11 @@ if (productPage) {
     const productKey = params.get("product") || "majica";
     const eventTypeLabels = {
         "paint-wine": "Paint & Wine",
+        "Paint and Wine": "Paint & Wine",
         neon: "Neon Paint & Cocktails",
-        kids: "Paint & Kids"
+        "Neon Paint and Cocktails": "Neon Paint & Cocktails",
+        kids: "Paint & Kids",
+        "Paint and Kids": "Paint & Kids"
     };
     let product = products[productKey] || products.majica;
 

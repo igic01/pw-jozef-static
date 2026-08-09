@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../assets/styles/elements/header.css">
     <link rel="stylesheet" href="../assets/styles/elements/footer.css">
     <link rel="stylesheet" href="../assets/styles/private-workshops.css">
-    <script src="../assets/scripts/elements.js?v=20260810-cart-2" defer></script>
+    <script src="../assets/scripts/elements.js?v=20260810-hero-4s" defer></script>
 </head>
 
 <body>
@@ -104,23 +104,24 @@
                         <div class="v4p-form-grid">
                             <div class="v4p-field">
                                 <label for="private-name">Ime i prezime</label>
-                                <input id="private-name" name="name" type="text" autocomplete="name" required>
+                                <input id="private-name" name="name" type="text" autocomplete="name" placeholder="Npr. Ana Petrović" required>
                             </div>
                             <div class="v4p-field">
                                 <label for="private-company">Kompanija / organizacija</label>
-                                <input id="private-company" name="company" type="text" autocomplete="organization">
+                                <input id="private-company" name="company" type="text" autocomplete="organization" placeholder="Npr. Studio ABC">
                             </div>
                             <div class="v4p-field">
                                 <label for="private-email">E-mail</label>
-                                <input id="private-email" name="email" type="email" autocomplete="email" required>
+                                <input id="private-email" name="email" type="email" autocomplete="email" placeholder="ime@primjer.com" required>
                             </div>
                             <div class="v4p-field">
                                 <label for="private-phone">Telefon</label>
-                                <input id="private-phone" name="phone" type="tel" autocomplete="tel" required>
+                                <input id="private-phone" name="phone" type="tel" autocomplete="tel" placeholder="+382 67 123 456" required>
                             </div>
                             <div class="v4p-field">
                                 <label for="private-type">Vrsta radionice</label>
-                                <select id="private-type" name="workshop">
+                                <select id="private-type" name="workshop" required>
+                                    <option value="" selected disabled>Odaberite vrstu radionice</option>
                                     <option>Klasična Paint &amp; Wine</option>
                                     <option>Neon Paint &amp; Cocktails</option>
                                     <option>Paint &amp; Kids</option>
@@ -129,7 +130,7 @@
                             </div>
                             <div class="v4p-field">
                                 <label for="private-guests">Broj učesnika</label>
-                                <input id="private-guests" name="guests" type="number" min="1" inputmode="numeric">
+                                <input id="private-guests" name="guests" type="number" min="1" inputmode="numeric" placeholder="Npr. 12">
                             </div>
                             <div class="v4p-field">
                                 <label for="private-date">Željeni datum</label>

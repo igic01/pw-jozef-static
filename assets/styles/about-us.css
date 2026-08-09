@@ -43,6 +43,7 @@
 
 .v4e-about-slide {
     opacity: 0;
+    transition: opacity 0.6s ease;
 }
 
 .v4e-about-slide.is-active {
@@ -257,8 +258,17 @@
 .v4e-about-avatar--light {
     width: min(380px, 100%);
     justify-self: center;
-    border-color: var(--color-red);
-    box-shadow: 12px 14px 0 rgba(0, 0, 0, 0.84);
+    overflow: hidden;
+    aspect-ratio: 1;
+    background: transparent;
+    border: 0;
+    border-radius: 50%;
+    box-shadow: none;
+}
+
+.v4e-about-avatar--light img {
+    height: 100%;
+    object-fit: cover;
 }
 
 .v4e-about-concepts-grid {

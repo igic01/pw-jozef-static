@@ -294,7 +294,7 @@
     min-height: 210px;
     padding: 16px 18px;
     color: var(--color-ink);
-    background: rgba(247, 243, 236, 0.82);
+    background: rgba(255, 255, 255, 0.9);
     border: 1px solid rgba(0, 0, 0, 0.32);
     border-radius: 0;
     line-height: 1.6;
@@ -313,17 +313,18 @@
 }
 
 .v4e-club-copy {
-    width: min(860px, 100%);
-    padding: 18px;
-    background: rgba(247, 243, 236, 0.88);
-    border: 1px solid rgba(0, 0, 0, 0.14);
+    width: min(720px, 100%);
+    padding: 0;
+    background: transparent;
+    border: 0;
+    text-align: center;
 }
 
 .v4e-club-copy p {
     margin: 0;
     color: var(--color-soft-ink);
-    font-size: var(--text-lg);
-    line-height: var(--line-height-copy);
+    font-size: clamp(0.92rem, 1.05vw, 1rem);
+    line-height: 1.65;
 }
 
 @media (max-width: 920px) {

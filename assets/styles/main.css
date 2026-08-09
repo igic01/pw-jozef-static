@@ -13,15 +13,15 @@
 :root {
     --color-red: #bf2020;
     --color-red-dark: #a51a1a;
-    --color-paper: #f7f3ec;
-    --color-paper-warm: #f3ebdf;
+    --color-paper: #ffffff;
+    --color-paper-warm: #f7f7f7;
     --color-white: #ffffff;
     --color-ink: #111111;
     --color-soft-ink: #1a1a1a;
     --color-dark: #080808;
     --color-image-placeholder: #d8e2ee;
     --color-line: rgba(0, 0, 0, 0.14);
-    --color-line-dark: rgba(247, 243, 236, 0.16);
+    --color-line-dark: rgba(255, 255, 255, 0.16);
     --font-heading: "Archivo Black", Arial, sans-serif;
     --font-body: "Open Sans Local", Arial, sans-serif;
     --title-xl: clamp(3rem, 7vw, 7.8rem);
@@ -38,8 +38,7 @@
     --section-y: clamp(40px, 6vw, 76px);
     --shadow-soft: 0 22px 50px rgba(0, 0, 0, 0.14);
     --paper-pattern:
-        linear-gradient(90deg, rgba(0, 0, 0, 0.04) 0, rgba(0, 0, 0, 0.04) 1px, transparent 1px, transparent 120px),
-        linear-gradient(180deg, rgba(191, 32, 32, 0.03), rgba(191, 32, 32, 0.03));
+        linear-gradient(90deg, rgba(0, 0, 0, 0.035) 0, rgba(0, 0, 0, 0.035) 1px, transparent 1px, transparent 120px);
 }
 
 *,

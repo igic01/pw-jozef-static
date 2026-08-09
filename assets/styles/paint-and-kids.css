@@ -59,6 +59,15 @@
       text-decoration: none;
     }
 
+    .theme-paint-kids .v4e-navbar-menu a,
+    .theme-paint-kids .v4e-navbar-menu a:hover,
+    .theme-paint-kids .v4e-navbar-menu a:focus-visible,
+    .theme-paint-kids .v4e-navbar-menu a[aria-current="page"] {
+      color: var(--ink);
+      background: transparent;
+      box-shadow: none;
+    }
+
     .page {
       overflow: hidden;
       position: relative;
@@ -267,11 +276,25 @@
 
     .button.primary {
       color: var(--text);
-      background: var(--yellow);
+      background: transparent;
     }
 
     .button.secondary {
       color: var(--white);
+      background: transparent;
+    }
+
+    .hero a.button.primary {
+      color: var(--white);
+    }
+
+    #voucher a.button.primary {
+      color: var(--ink);
+      border-color: var(--ink);
+    }
+
+    .theme-paint-kids .v5e-schedule[data-theme="kids"] a.v5e-button {
+      color: var(--red);
       background: transparent;
     }
 
@@ -394,9 +417,23 @@
     }
 
     .section.white {
-      background: rgba(255, 255, 255, 0.58);
+      background: #fff3cf;
       border-top: 2px solid rgba(36, 26, 24, 0.08);
       border-bottom: 2px solid rgba(36, 26, 24, 0.08);
+    }
+
+    #benefits.section.white {
+      background:
+        radial-gradient(circle at 8% 18%, rgba(253, 190, 79, 0.42), transparent 24%),
+        radial-gradient(circle at 92% 76%, rgba(104, 131, 253, 0.24), transparent 27%),
+        #eef2ff;
+    }
+
+    #voucher.section.white {
+      background:
+        radial-gradient(circle at 86% 16%, rgba(255, 224, 236, 0.78), transparent 26%),
+        radial-gradient(circle at 10% 84%, rgba(64, 161, 30, 0.18), transparent 28%),
+        #f1ffe8;
     }
 
     .shell {
@@ -413,6 +450,10 @@
 
     .split.reverse {
       grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+    }
+
+    .split.reverse > :last-child {
+      order: -1;
     }
 
     .panel {
@@ -598,6 +639,18 @@
       box-shadow: 7px 7px 0 var(--ink);
     }
 
+    .feature:nth-child(1) {
+      background: #fff1c9;
+    }
+
+    .feature:nth-child(2) {
+      background: #e7edff;
+    }
+
+    .feature:nth-child(3) {
+      background: #eaffdf;
+    }
+
     .feature img {
       width: 112px;
       height: 112px;
@@ -696,8 +749,8 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      color: var(--white);
-      background: var(--red);
+      color: var(--red);
+      background: transparent;
       border: 2px solid var(--ink);
       border-radius: 8px;
       font-weight: 900;
