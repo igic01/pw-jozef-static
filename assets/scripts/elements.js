@@ -98,6 +98,7 @@ function setupHeader(scope) {
     const menuToggle = header.querySelector(".v4e-navbar-toggle");
     const menu = header.querySelector(".v4e-navbar-menu");
     const languageDropdown = header.querySelector("[data-language-dropdown]");
+    const languageToggle = languageDropdown?.querySelector(".v4e-language-toggle");
     const currentPath = window.location.pathname.replace(/\/$/, "/index.html");
 
     menu?.querySelectorAll("a").forEach((link) => {
@@ -107,6 +108,11 @@ function setupHeader(scope) {
     });
 
     menuToggle?.addEventListener("click", () => {
+        const willOpen = !header.classList.contains("is-open");
+        if (willOpen) {
+            languageDropdown?.classList.remove("is-open");
+            languageToggle?.setAttribute("aria-expanded", "false");
+        }
         const isOpen = header.classList.toggle("is-open");
         menuToggle.setAttribute("aria-expanded", String(isOpen));
         menuToggle.setAttribute("aria-label", isOpen ? "Zatvori meni" : "Otvori meni");
@@ -116,10 +122,10 @@ function setupHeader(scope) {
         if (!event.target.closest("a")) return;
         header.classList.remove("is-open");
         menuToggle?.setAttribute("aria-expanded", "false");
+        menuToggle?.setAttribute("aria-label", "Otvori meni");
     });
 
     if (!languageDropdown) return;
-    const languageToggle = languageDropdown.querySelector(".v4e-language-toggle");
     const currentLanguage = languageDropdown.querySelector(".v4e-language-current");
     const languageOptionsRoot = languageDropdown.querySelector(".v4e-language-options");
     const languageNames = {
@@ -232,6 +238,12 @@ function setupHeader(scope) {
 
     languageToggle?.addEventListener("click", (event) => {
         event.stopPropagation();
+        const willOpen = !languageDropdown.classList.contains("is-open");
+        if (willOpen) {
+            header.classList.remove("is-open");
+            menuToggle?.setAttribute("aria-expanded", "false");
+            menuToggle?.setAttribute("aria-label", "Otvori meni");
+        }
         const isOpen = languageDropdown.classList.toggle("is-open");
         languageToggle.setAttribute("aria-expanded", String(isOpen));
     });
