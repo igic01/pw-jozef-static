@@ -104,8 +104,8 @@ function createCartItem(item) {
     remove.className = "v5c-remove";
     remove.dataset.cartRemove = item.id;
     remove.setAttribute("aria-label", `Ukloni ${item.name}`);
-    const trashIcon = document.createElement("span");
-    trashIcon.className = "v5c-trash-icon";
+    const trashIcon = document.createElement("i");
+    trashIcon.className = "fa-solid fa-trash-can v5c-trash-icon";
     trashIcon.setAttribute("aria-hidden", "true");
     remove.appendChild(trashIcon);
     actions.append(stepper, remove);

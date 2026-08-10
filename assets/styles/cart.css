@@ -182,36 +182,18 @@
     background: transparent;
     border: 0;
     cursor: pointer;
+    transition: color 0.2s ease, background-color 0.2s ease;
 }
 
 .v5c-trash-icon {
-    position: relative;
-    width: 13px;
-    height: 15px;
-    border: 2px solid currentColor;
-    border-top: 0;
-    border-radius: 0 0 2px 2px;
+    font-size: 0.95rem;
 }
 
-.v5c-trash-icon::before,
-.v5c-trash-icon::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    background: currentColor;
-    transform: translateX(-50%);
-}
-
-.v5c-trash-icon::before {
-    top: -4px;
-    width: 17px;
-    height: 2px;
-}
-
-.v5c-trash-icon::after {
-    top: -7px;
-    width: 7px;
-    height: 2px;
+.v5c-remove:hover,
+.v5c-remove:focus-visible {
+    color: var(--color-red);
+    background: var(--color-paper-warm);
+    outline: none;
 }
 
 .v5c-line-total {
