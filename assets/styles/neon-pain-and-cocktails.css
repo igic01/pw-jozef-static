@@ -490,6 +490,16 @@ body {
     max-width: 62ch;
 }
 
+.npk-section-head .npk-heading {
+    max-width: 17ch;
+    font-size: clamp(2rem, 4.2vw, 4.35rem);
+    overflow-wrap: anywhere;
+}
+
+.npk-section-head .npk-heading .script {
+    font-size: 1.1em;
+}
+
 .npk-booking-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -690,6 +700,12 @@ body {
 
     .npk-heading {
         font-size: clamp(2.25rem, 11vw, 3.8rem);
+    }
+
+    .npk-section-head .npk-heading {
+        max-width: 100%;
+        font-size: clamp(1.8rem, 8.5vw, 2.75rem);
+        line-height: 1;
     }
 
     .npk-actions {
