@@ -487,18 +487,65 @@ function setupStore(scope) {
         if (next) next.disabled = viewport.scrollLeft >= maxScroll - 2;
     };
 
+    const getCardScrollLeft = (card) => {
+        const viewportRect = viewport.getBoundingClientRect();
+        const cardRect = card.getBoundingClientRect();
+        const maxScroll = viewport.scrollWidth - viewport.clientWidth;
+        const cardLeft = viewport.scrollLeft + cardRect.left - viewportRect.left;
+        return Math.min(maxScroll, Math.max(0, cardLeft));
+    };
+
+    const getClosestCardIndex = (cards) => cards.reduce((closestIndex, card, index) => {
+        const closestDistance = Math.abs(getCardScrollLeft(cards[closestIndex]) - viewport.scrollLeft);
+        const cardDistance = Math.abs(getCardScrollLeft(card) - viewport.scrollLeft);
+        return cardDistance < closestDistance ? index : closestIndex;
+    }, 0);
+
+    let intendedCardIndex = 0;
+
     store.addEventListener("click", (event) => {
         const direction = event.target.closest("[data-store-direction]");
         if (!direction || !viewport || layout !== "carousel") return;
-        const amount = viewport.clientWidth * 0.82 * (direction.dataset.storeDirection === "next" ? 1 : -1);
-        viewport.scrollBy({
-            left: amount,
+
+        const cards = [...grid.querySelectorAll(".v5e-card")];
+        if (!cards.length) return;
+
+        const closestIndex = getClosestCardIndex(cards);
+        const intendedCard = cards[intendedCardIndex];
+        const isStillMoving = intendedCard
+            && Math.abs(getCardScrollLeft(intendedCard) - viewport.scrollLeft) > 2;
+        const currentIndex = isStillMoving ? intendedCardIndex : closestIndex;
+        const firstCardLeft = getCardScrollLeft(cards[0]);
+        const secondCardLeft = cards[1] ? getCardScrollLeft(cards[1]) : firstCardLeft + viewport.clientWidth;
+        const cardStep = Math.max(1, secondCardLeft - firstCardLeft);
+        const cardsPerView = Math.max(1, Math.round(viewport.clientWidth / cardStep));
+        const indexChange = direction.dataset.storeDirection === "next" ? cardsPerView : -cardsPerView;
+        intendedCardIndex = Math.min(cards.length - 1, Math.max(0, currentIndex + indexChange));
+
+        viewport.scrollTo({
+            left: getCardScrollLeft(cards[intendedCardIndex]),
             behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"
         });
     });
 
-    viewport?.addEventListener("scroll", updateArrows, { passive: true });
-    window.addEventListener("resize", updateArrows);
+    const syncIntendedCard = () => {
+        if (!viewport || !grid) return;
+        const cards = [...grid.querySelectorAll(".v5e-card")];
+        if (cards.length) intendedCardIndex = getClosestCardIndex(cards);
+    };
+
+    let scrollEndTimer;
+    viewport?.addEventListener("pointerdown", syncIntendedCard, { passive: true });
+    viewport?.addEventListener("wheel", syncIntendedCard, { passive: true });
+    viewport?.addEventListener("scroll", () => {
+        updateArrows();
+        window.clearTimeout(scrollEndTimer);
+        scrollEndTimer = window.setTimeout(syncIntendedCard, 120);
+    }, { passive: true });
+    window.addEventListener("resize", () => {
+        syncIntendedCard();
+        updateArrows();
+    });
     requestAnimationFrame(updateArrows);
 }
 

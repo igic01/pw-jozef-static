@@ -139,6 +139,7 @@
 
 .v5e-schedule[data-layout="carousel"] .v5e-card {
     scroll-snap-align: start;
+    scroll-snap-stop: always;
 }
 
 .v5e-card {
@@ -502,6 +503,10 @@
 
     .v5e-schedule[data-layout="carousel"] .v5e-grid {
         grid-auto-columns: 100%;
+    }
+
+    .v5e-schedule[data-layout="carousel"] .v5e-card {
+        width: 100%;
     }
 
     .v5e-card {
